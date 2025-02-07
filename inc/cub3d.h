@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/07 13:34:54 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:38:44 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <string.h>
-//# include "mlx/mlx.h"
+# include "mlx/mlx.h"
 # include "libft/libft.h"
 
 # define ESC 65307
