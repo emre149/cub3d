@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/02/07 13:23:09 by ededemog         ###   ########.fr        #
+#    Updated: 2025/02/07 16:44:17 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,15 @@ INCDIR := ./inc/mlx/ \
 		./inc/
 LIBFT_PATH := ./inc/libft 
 
-SRC := main.c
-OBJ := $(SRC:.c=.o)
+SRC := main.c \
+		parsing/map_parsing.c \
+		parsing/colors_parsing.c \
+		parsing/map_validating.c \
+		parsing/map_reading.c \
+		parsing/texture_validation.c \
+		utils/parsing_utils.c
 
-SRC := $(addprefix $(SRCDIR),$(SRC))
-OBJ := $(addprefix $(OBJDIR),$(OBJ))
+OBJ := $(addprefix $(OBJDIR), $(SRC:.c=.o))
 
 LIBFT := $(LIBFT_PATH)/libft.a 
 
@@ -44,9 +48,10 @@ endif
 CC := cc
 CFLAGS := -Werror -Wextra -Wall -g
 
-all: $(OBJDIR) $(NAME)
+all: $(NAME)
 
 $(OBJDIR)%.o: $(SRCDIR)%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 	@echo $(GREEN)Compiling $< to $@$(RESET)
 
@@ -55,9 +60,6 @@ $(MLX):
 
 $(LIBFT):
 	@make -sC $(LIBFT_PATH)
-
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
 
 $(NAME): $(OBJ) $(MLX) $(LIBFT)
 	@$(CC) $(OBJ) $(MLX_FLAGS) -L$(LIBFT_PATH) -lft -lm -o $(NAME)
