@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:23 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/11 19:29:17 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:39:27 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	parse_texture(char **texture, char *line)
 void	parse_color(int *color, char *line)
 {
 	int	i;
-	int r;
-	int g;
-	int b;
+	int	r;
+	int	g;
+	int	b;
 
 	i = 1;
 	while (line[i] == ' ')
