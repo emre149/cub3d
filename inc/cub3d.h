@@ -6,11 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2025/02/11 15:59:40 by ededemog         ###   ########.fr       */
-=======
-/*   Updated: 2025/02/07 16:43:17 by ededemog         ###   ########.fr       */
->>>>>>> 1846e4ad457c65975e64a6830ee988060fee7323
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +35,12 @@ typedef struct s_data
 typedef struct s_map_info
 {
 	char	**map;
-<<<<<<< HEAD
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
 	char	*sprite;
 	int		floor_color;
-=======
-	char	*north_texture;
-	char	*south_texture;
-	char	*west_texture;
-	char	*east_texture;
-	char	floor_color;
->>>>>>> 1846e4ad457c65975e64a6830ee988060fee7323
 	int		ceiling_color;
 	int		player_x;
 	int		player_y;
@@ -61,7 +49,6 @@ typedef struct s_map_info
 	int		map_width;
 }			t_map_info;
 
-<<<<<<< HEAD
 // main
 int	close_window(t_data *data);
 int	key_hook(int keycode, t_data *data);
@@ -77,20 +64,5 @@ int is_map_line(char *line);
 
 void	free_map(char **map);
 
-=======
-// parsing
-
-int			parse_color(char *line);
-int			parse_map_file(t_map_info *map_info, char *file_path);
-int			read_map(t_map_info *map_info, int fd);
-int			valid_map(t_map_info *map_info);
-int			validate_textures(t_map_info *map_info);
-
-// parsing utils
-int			ft_isspace_str(char *str);
-void		*ft_realloc(void *ptr, size_t size);
-void		free_map(char **map);
-void		free_map_info(t_map_info *map_info);
->>>>>>> 1846e4ad457c65975e64a6830ee988060fee7323
 
 #endif
