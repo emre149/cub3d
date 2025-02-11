@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:58:23 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/11 16:07:07 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:29:17 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,11 @@ void	parse_texture(char **texture, char *line)
 void	parse_color(int *color, char *line)
 {
 	int	i;
+	int r;
+	int g;
+	int b;
 
 	i = 1;
-	int r, g, b;
 	while (line[i] == ' ')
 		i++;
 	r = ft_atoi(&line[i]);
@@ -105,27 +107,59 @@ void	parse_color(int *color, char *line)
 void	parse_map_only(t_map_info *map_info)
 {
 	int		i;
+	int		j;
+	int		map_start;
+	int		map_end;
+	char	**new_map;
+	int		map_size;
+
+	i = 0;
+	i = 0;
+	j = 0;
+	map_start = -1;
+	map_end = -1;
+	if (!map_info->map)
+		return ;
+	while (map_info->map[i])
+	{
+		if (is_map_line(map_info->map[i]))
+		{
+			if (map_start == -1)
+				map_start = i;
+			map_end = i;
+		}
+		i++;
+	}
+	if (map_start == -1)
+		return ;
+	map_size = map_end - map_start + 1;
+	new_map = malloc((map_size + 1) * sizeof(char *));
+	if (!new_map)
+		return ;
+	for (i = map_start; i <= map_end; i++)
+	{
+		new_map[j] = ft_strdup(map_info->map[i]);
+		if (!new_map[j])
+		{
+			free_map(new_map);
+			return ;
+		}
+		j++;
+	}
+	new_map[j] = NULL;
+	free_map(map_info->map);
+	map_info->map = new_map;
+}
+
+int	parse_config(t_map_info *map_info)
+{
+	int		i;
 	char	*line;
 
 	i = 0;
 	while (map_info->map[i])
 	{
 		line = map_info->map[i];
-		if (is_map_line(line))
-		{
-			map_info->map = &map_info->map[i];
-			return ;
-		}
-		i++;
-	}
-}
-
-int	parse_config(t_map_info *map_info)
-{
-	int i = 0;
-	while (map_info->map[i])
-	{
-		char *line = map_info->map[i];
 		if (strncmp(line, "R ", 2) == 0)
 			parse_resolution(map_info, line);
 		else if (strncmp(line, "NO ", 3) == 0)
@@ -151,16 +185,31 @@ int	parse_config(t_map_info *map_info)
 	}
 	return (1);
 }
-
-
-int is_map_line(char *line)
+int	is_map_line(char *line)
 {
-    while (*line)
-    {
-        if (*line != ' ' && *line != '1' && *line != '0' &&
-            *line != 'N' && *line != 'S' && *line != 'E' && *line != 'W')
-            return (0);
-        line++;
-    }
-    return (1);
+	char	*trimmed;
+	int		i;
+	int		valid;
+
+	i = 0;
+	valid = 0;
+	trimmed = ft_strtrim(line, " \t\n");
+	if (!trimmed)
+		return (0);
+	while (trimmed[i])
+	{
+		if (trimmed[i] == '1' || trimmed[i] == '0' || trimmed[i] == 'N'
+			|| trimmed[i] == 'S' || trimmed[i] == 'E' || trimmed[i] == 'W')
+		{
+			valid = 1;
+		}
+		else if (trimmed[i] != ' ')
+		{
+			free(trimmed);
+			return (0);
+		}
+		i++;
+	}
+	free(trimmed);
+	return (valid);
 }
