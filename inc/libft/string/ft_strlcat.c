@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emre149 <emre149@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 15:30:28 by emre149           #+#    #+#             */
-/*   Updated: 2025/02/10 15:33:39 by emre149          ###   ########.fr       */
+/*   Created: 2023/11/08 19:10:30 by ededemog          #+#    #+#             */
+/*   Updated: 2025/02/10 16:00:47 by emre149          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-long long	ft_atoll(const char *str)
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	long long	nbr;
-	int			sign;
+	size_t	src_len;
+	size_t	i;
+	size_t	j;
 
-	nbr = 0;
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
-		sign = 44 - *str++;
-	while (ft_isdigit(*str))
-		nbr = nbr * 10 + (*str++ - '0');
-	return (nbr * sign);
+	src_len = 0;
+	i = 0;
+	j = 0;
+	while (src[src_len])
+		src_len++;
+	if (dstsize == 0)
+		return (src_len);
+	while (dst[i])
+		i++;
+	if (dstsize < i)
+		return (dstsize + src_len);
+	while (i + j < dstsize - 1 && src[j])
+	{
+		dst[i + j] = src[j];
+		j++;
+	}
+	dst[i + j] = '\0';
+	return (i + src_len);
 }

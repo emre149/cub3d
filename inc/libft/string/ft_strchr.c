@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emre149 <emre149@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 15:30:28 by emre149           #+#    #+#             */
-/*   Updated: 2025/02/10 15:33:39 by emre149          ###   ########.fr       */
+/*   Created: 2023/11/07 14:57:09 by ededemog          #+#    #+#             */
+/*   Updated: 2025/02/10 16:00:47 by emre149          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-long long	ft_atoll(const char *str)
+char	*ft_strchr(const char *str, int searchedChar)
 {
-	long long	nbr;
-	int			sign;
+	int	i;
 
-	nbr = 0;
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
-		sign = 44 - *str++;
-	while (ft_isdigit(*str))
-		nbr = nbr * 10 + (*str++ - '0');
-	return (nbr * sign);
+	i = 0;
+	while (str[i])
+	{
+		if ((char)str[i] == (char)searchedChar)
+		{
+			return ((char *)&str[i]);
+		}
+		i++;
+	}
+	if ((char)searchedChar == (char)str[i])
+		return ((char *)&str[i]);
+	return (NULL);
 }

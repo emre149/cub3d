@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emre149 <emre149@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 15:30:28 by emre149           #+#    #+#             */
-/*   Updated: 2025/02/10 15:33:39 by emre149          ###   ########.fr       */
+/*   Created: 2023/12/15 18:33:38 by ededemog          #+#    #+#             */
+/*   Updated: 2025/02/10 16:00:47 by emre149          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-long long	ft_atoll(const char *str)
+int	ft_lstsize(t_list *lst)
 {
-	long long	nbr;
-	int			sign;
+	int	i;
 
-	nbr = 0;
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
-		sign = 44 - *str++;
-	while (ft_isdigit(*str))
-		nbr = nbr * 10 + (*str++ - '0');
-	return (nbr * sign);
+	i = 0;
+	while (lst)
+	{
+		i++;
+		lst = lst->next;
+	}
+	return (i);
 }

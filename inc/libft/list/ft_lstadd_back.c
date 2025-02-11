@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emre149 <emre149@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 15:30:28 by emre149           #+#    #+#             */
-/*   Updated: 2025/02/10 15:33:39 by emre149          ###   ########.fr       */
+/*   Created: 2023/12/15 19:06:37 by ededemog          #+#    #+#             */
+/*   Updated: 2025/02/10 16:00:47 by emre149          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-long long	ft_atoll(const char *str)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	long long	nbr;
-	int			sign;
+	t_list	*last;
 
-	nbr = 0;
-	sign = 1;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-' || *str == '+')
-		sign = 44 - *str++;
-	while (ft_isdigit(*str))
-		nbr = nbr * 10 + (*str++ - '0');
-	return (nbr * sign);
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+	{
+		*lst = new;
+		return ;
+	}
+	last = *lst;
+	while (last && last->next)
+		last = last->next;
+	last->next = new;
 }

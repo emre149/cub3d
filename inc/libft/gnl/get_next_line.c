@@ -1,107 +1,145 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tbabou <tbabou@student.42.fr>              +#+  +:+       +#+        */
+/*   By: emre149 <emre149@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/12 22:32:27 by tbabou            #+#    #+#             */
-/*   Updated: 2024/01/17 20:31:22 by tbabou           ###   ########.fr       */
+/*   Created: 2024/01/26 04:00:18 by ededemog          #+#    #+#             */
+/*   Updated: 2025/02/10 16:39:18 by emre149          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t dstsize)
-{
-	size_t	srcsize;
-	size_t	i;
-
-	srcsize = ft_strlen(src);
-	i = 0;
-	if (dstsize > 0)
-	{
-		while (i < srcsize && i < dstsize - 1)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-		dst[i] = '\0';
-	}
-	return (srcsize);
-}
-
-char	*ft_strrchr_gnl(char *s, int c)
-{
-	int		i;
-	char	*res;
-
-	res = NULL;
-	i = 0;
-	while (s && s[i])
-	{
-		if (s[i] == (char)c)
-		{
-			res = (char *)&s[i];
-			break ;
-		}
-		i++;
-	}
-	if (s[i] == c)
-		res = (char *)&s[i + 1];
-	return (res);
-}
-
-int	get_final_size(char *s1, char *s2, char *buffer)
-{
-	int	size;
-
-	size = 0;
-	if (s1)
-	{
-		size = s1 - s2;
-		ft_strlcpy_gnl(buffer, s1, BUFFER_SIZE + 1);
-	}
-	else
-	{
-		size = ft_strlen(s2);
-		ft_strlcpy_gnl(buffer, "", BUFFER_SIZE +1);
-	}
-	return (size);
-}
-
-char	*get_line(int fd)
-{
-	static char	buffer[FD_SIZE][BUFFER_SIZE + 1];
-	char		*line;
-	char		*new_line;
-	int			amount;
-	int			final_size;
-
-	line = ft_strdup(buffer[fd]);
-	amount = BUFFER_SIZE;
-	while (!isnewline(buffer[fd]) && (amount == BUFFER_SIZE || amount > 0))
-	{
-		amount = read(fd, buffer[fd], BUFFER_SIZE);
-		buffer[fd][amount] = '\0';
-		line = ft_strjoin(line, buffer[fd]);
-	}
-	if (!ft_strlen(line))
-		return (free(line), NULL);
-	new_line = ft_strrchr_gnl(line, '\n');
-	final_size = get_final_size(new_line, line, buffer[fd]);
-	line[final_size] = '\0';
-	return (line);
-}
+#include "get_next_line.h"
 
 char	*get_next_line(int fd)
 {
-	char	*line;
+	static t_glist	*stash = NULL;
+	char			*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, &line, 0) < 0)
 		return (NULL);
-	line = get_line(fd);
-	if (!line || line[0] == '\0')
+	line = NULL;
+	read_to_stash(fd, &stash);
+	if (stash == NULL)
 		return (NULL);
+	stash_to_line(stash, &line);
+	clean(&stash);
+	if (line[0] == '\0')
+	{
+		free_stash(stash);
+		stash = NULL;
+		free(line);
+		return (NULL);
+	}
 	return (line);
+}
+
+void	read_to_stash(int fd, t_glist **stash)
+{
+	char	*buf;
+	int		readed;
+
+	readed = 1;
+	while (!newline(*stash) && readed != 0)
+	{
+		buf = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+		if (buf == NULL)
+			return ;
+		readed = (int)read(fd, buf, BUFFER_SIZE);
+		if ((*stash == NULL && readed == 0) || readed == -1)
+		{
+			free(buf);
+			return ;
+		}
+		buf[readed] = '\0';
+		add(stash, buf, readed);
+		free(buf);
+	}
+}
+
+void	add(t_glist **stash, char *buf, int already_read)
+{
+	int		i;
+	t_glist	*last_node;
+	t_glist	*new_node;
+
+	i = 0;
+	new_node = malloc(sizeof(t_glist));
+	if (!new_node)
+		return ;
+	new_node->next = NULL;
+	new_node->content = malloc(sizeof(char) * (already_read + 1));
+	if (!new_node->content)
+		return ;
+	while (buf[i] && i < already_read)
+	{
+		new_node->content[i] = buf[i];
+		i++;
+	}
+	new_node->content[i] = '\0';
+	if (!*stash)
+	{
+		*stash = new_node;
+		return ;
+	}
+	last_node = ft_glistlast(*stash);
+	last_node->next = new_node;
+}
+
+void	stash_to_line(t_glist *stash, char **line)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	if (!stash)
+		return ;
+	line_allocation(line, stash);
+	if (!*line)
+		return ;
+	while (stash)
+	{
+		i = 0;
+		while (stash->content[i])
+		{
+			if (stash->content[i] == '\n')
+			{
+				(*line)[j++] = stash->content[i];
+				break ;
+			}
+			(*line)[j++] = stash->content[i++];
+		}
+		stash = stash->next;
+	}
+	(*line)[j] = '\0';
+}
+
+void	clean(t_glist **stash)
+{
+	t_glist	*last_node;
+	t_glist	*clean_node;
+	int		i;
+	int		j;
+
+	clean_node = malloc(sizeof(t_glist));
+	if (!stash || !clean_node)
+		return ;
+	clean_node->next = NULL;
+	last_node = ft_glistlast(*stash);
+	i = 0;
+	while (last_node->content[i] && last_node->content[i] != '\n')
+		i++;
+	if (last_node->content && last_node->content[i] == '\n')
+		i++;
+	j = ft_strlen(last_node->content);
+	clean_node->content = malloc(sizeof(char) * ((j - i) + 1));
+	if (!clean_node->content)
+		return ;
+	j = 0;
+	while (last_node->content[i])
+		clean_node->content[j++] = last_node->content[i++];
+	clean_node->content[j] = '\0';
+	free_stash(*stash);
+	*stash = clean_node;
 }

@@ -1,82 +1,93 @@
-LIBC_FILES = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
-	ft_isascii.c ft_isdigit.c ft_isprint.c ft_memchr.c \
-	ft_memcmp.c ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c \
-	ft_strdup.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strncmp.c \
-	ft_strnstr.c ft_strrchr.c ft_tolower.c ft_toupper.c ft_strncmp.c \
-	ft_strncpy.c ft_strcmp.c ft_strcat.c ft_strncat.c
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/11/07 15:53:33 by ededemog          #+#    #+#              #
+#    Updated: 2025/02/11 16:11:58 by ededemog         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-ADDITIONAL_FILES = ft_itoa.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c \
-	ft_split.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c ft_striteri.c \
-	ft_isspace.c 
+NAME = libft.a
+CC = clang
+CFLAGS = -Wall -Wextra -Werror -g
+EXEC = prog
+SRCS = basics/ft_atoi.c basics/ft_isalnum.c basics/ft_isalpha.c \
+		basics/ft_isascii.c basics/ft_isdigit.c basics/ft_isspace.c \
+        basics/ft_isprint.c string/ft_strchr.c string/ft_strrchr.c \
+		string/ft_strlen.c basics/ft_tolower.c \
+        basics/ft_toupper.c string/ft_strdup.c basics/ft_putchar_fd.c \
+		basics/ft_putstr_fd.c basics/ft_putendl_fd.c string/ft_strlcpy.c \
+		memory/ft_bzero.c memory/ft_memset.c memory/ft_memcpy.c \
+        basics/ft_putnbr_fd.c memory/ft_memmove.c string/ft_strnstr.c \
+		string/ft_strlcat.c memory/ft_calloc.c string/ft_strncmp.c \
+		string/ft_strmapi.c memory/ft_memchr.c memory/ft_memcmp.c \
+		string/ft_substr.c string/ft_striteri.c string/ft_itoa.c \
+		string/ft_strjoin.c string/ft_split.c string/ft_strtrim.c \
+        maths/ft_atoll.c maths/ft_fibonnaci.c list/ft_lstnew.c \
+		list/ft_lstadd_front.c list/ft_lstsize.c list/ft_lstlast.c \
+		list/ft_lstadd_back.c list/ft_lstdelone.c list/ft_lstclear.c \
+		list/ft_lstiter.c list/ft_lstmap.c gnl/get_next_line.c \
+		gnl/get_next_line_utils.c memory/ft_realloc.c \
+		memory/ft_memdel.c
 
-BONUS_FILES = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
-	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+MAIN	=	main.c
 
-PRINTF_FILES = ft_printf.c print_hexa.c print_nbr.c print_ptr.c \
-	print_str.c print_utils.c
-	
-GNL_FILES = get_next_line.c get_next_line_utils.c \
+OBJM	=	$(MAIN:.c=.o)
 
-OTHER_FILES = ft_addchar.c ft_freesplit.c ft_print_split.c ft_split_len.c \
-	ft_mstrlcpy.c
+TNAME	= 	test
 
-MATHS_FILES = ft_pow.c ft_sqrt.c ft_factorial.c ft_fibonacci.c ft_is_prime.c ft_intlen.c \
-	ft_atoll.c
+OBJS 	= 	$(SRCS:.c=.o)
 
-STRINGS_FILES = ft_strcap.c ft_strlowcase.c ft_strupcase.c ft_strjoins.c \
-	ft_strjoin_double.c ft_strcpy.c ft_edgecmp.c ft_isdigits_str.c \
-	ft_isredir.c ft_safecmp.c
+AR		= 	ar rc
 
-LIBC = $(addprefix basic/, $(LIBC_FILES))
-ADDITIONAL = $(addprefix additional/, $(ADDITIONAL_FILES))
-PRINTF = $(addprefix printf/, $(PRINTF_FILES))
-BONUS = $(addprefix bonus/, $(BONUS_FILES))
-GNL = $(addprefix gnl/, $(GNL_FILES))
-OTHER = $(addprefix other/, $(OTHER_FILES))
-MATHS = $(addprefix maths/, $(MATHS_FILES))
-STRINGS = $(addprefix strings/, $(STRINGS_FILES))
-
-SRCS = ${LIBC} ${ADDITIONAL} ${BONUS} ${PRINTF} ${GNL} ${OTHER} ${MATHS} ${STRINGS}
-
-OBJS = ${SRCS:.c=.o}
-
-LIB = libft.a
-
-CC = gcc
-
-CFLAGS = -Wall -Werror -Wextra -I ./ -g3
-
-TOTAL_FILES := $(words $(SRCS))
-COMPILED_COUNT := 0
-
-define progress_message
-	$(eval COMPILED_COUNT=$(shell echo $$(($(COMPILED_COUNT)+1))))
-	@printf "\033[K⚙️ Compiling %-30s [%0*d/%d]...\r" "$<" $(shell echo $${#TOTAL_FILES}) ${COMPILED_COUNT} ${TOTAL_FILES}
-endef
+RM		= 	rm -f
 
 .c.o:
-	$(call progress_message)
-	@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-	@printf "\033[K🚀 Compiled %-30s [%0*d/%d]\n" "$<" $(shell echo $${#TOTAL_FILES}) ${COMPILED_COUNT} ${TOTAL_FILES}
+	@echo "🔨 Compiling $<..."
+	@$(CC) $(CFLAGS) -o $(<:.c=.o) -c $<
 
-${LIB}:	${OBJS}
-	@printf "\nCreating library...\r"
-	@ar -rsc ${LIB} ${OBJS}
-	@printf "\033[K✅ Libft created successfully!\n"
+$(NAME):	$(OBJS)
+	@echo "📦 Creating archive $(NAME)..."
+	@$(AR) $(NAME) $(OBJS)
+	@echo "✅ Archive $(NAME) created!"
 
-all: 	${LIB}
+test:		$(NAME) bonus
+	@echo "🚀 Building test executable..."
+	@$(CC) $(CFLAGS) -o $(TNAME) $(MAIN) -L. -lft
+	@echo "✅ Test executable $(TNAME) created!"
+
+ifneq ($(shell uname), Darwin)
+breaker:
+	@echo "🔧 Building shared library for Linux..."
+	@$(CC) -nostartfiles -shared -fPIC -ldl $(CFLAGS) -o libft.so $(SRCS) $(BONUS)
+	@echo "✅ Shared library libft.so created!"
+else
+breaker:
+	@echo "🔧 Building shared library for macOS..."
+	@$(CC) -dynamiclib $(CFLAGS) -o libft.so $(SRCS) $(BONUS) -L../obj -lmalloc
+	@echo "✅ Shared library libft.so created!"
+endif
+
+all:		$(NAME)
+
+bonus:		$(OBJB)
+	@echo "🔨 Compiling bonus files..."
+	@$(AR) $(NAME) $(OBJB)
+	@echo "✅ Bonus files compiled and added to $(NAME)!"
 
 clean:
-	@printf "Cleaning...\r"
-	@rm -f ${OBJS}
-	@printf "\033[K✅ Cleaned successfully!\n"
+	@echo "🧹 Cleaning object files..."
+	@$(RM) $(OBJS) $(OBJM) $(OBJB)
+	@echo "✅ Object files cleaned!"
 
-fclean:
-	@printf "Full cleaning...\r"
-	@rm -f ${LIB}
-	@rm -f ${OBJS}
-	@printf "\033[K✅ Libft fully cleaned successfully!\n"
+fclean:		clean
+	@echo "🧹 Cleaning all generated files..."
+	@$(RM) $(NAME) $(TNAME)
+	@echo "✅ All generated files cleaned!"
 
-re:	fclean all
+re:			fclean all
 
-.PHONY: all clean fclean re bonus
+.PHONY:		all clean fclean re test
