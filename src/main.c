@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/11 19:35:07 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:36:48 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ int	main(int ac, char **av)
 {
 	t_data		data;
 	t_map_info	map_info;
-	int			debug_i;
 
 	if (ac != 2)
 	{
-		write(2, "Error:\nUsage: ./cub3D <map.cub>\n", 32);
+		write(2, "Usage: ./cub3D <map.cub>\n", 25);
 		return (1);
 	}
 	if (!is_valid_map_file(av[1]))
@@ -50,23 +49,11 @@ int	main(int ac, char **av)
 		write(2, "Error: Failed to parse map file\n", 32);
 		return (1);
 	}
-	printf("Resolution: %d x %d\n", map_info.map_width, map_info.map_height);
-	printf("Textures: NO=%s, SO=%s, WE=%s, EA=%s, S=%s\n", map_info.no_texture,
-		map_info.so_texture, map_info.we_texture, map_info.ea_texture,
-		map_info.sprite);
-	printf("Floor color: %d\n", map_info.floor_color);
-	printf("Ceiling color: %d\n", map_info.ceiling_color);
-	debug_i = 0;
-	while (map_info.map[debug_i])
-	{
-		printf("Line %d: %s\n", debug_i, map_info.map[debug_i]);
-		debug_i++;
-	}
-	printf("Total map lines: %d\n", debug_i);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return (1);
-	data.win = mlx_new_window(data.mlx, 800, 600, "Cub3D");
+	data.win = mlx_new_window(data.mlx, map_info.map_width, map_info.map_height,
+			"Cub3D");
 	if (!data.win)
 	{
 		free(data.mlx);

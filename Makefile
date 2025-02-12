@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/02/11 18:23:33 by ededemog         ###   ########.fr        #
+#    Updated: 2025/02/12 12:56:41 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,13 @@ INCDIR := ./inc/mlx/ ./inc/mlx-mac/ ./inc/
 
 LIBFT_PATH := ./inc/libft
 
-SRC := $(SRCDIR)main.c \
-       $(SRCDIR)parsing/read_map.c \
-	   $(SRCDIR)utils/map_utils.c \
+SRC_FILES := main.c \
+             parsing/read_map.c \
+             parsing/parse_config.c \
+			 parsing/parse_map.c \
+             utils/map_utils.c \
+
+SRC := $(addprefix $(SRCDIR), $(SRC_FILES))
 
 OBJ := $(patsubst $(SRCDIR)%, $(OBJDIR)%, $(SRC:.c=.o))
 

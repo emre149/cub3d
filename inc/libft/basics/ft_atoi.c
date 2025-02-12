@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emre149 <emre149@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 19:26:11 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/10 16:00:47 by emre149          ###   ########.fr       */
+/*   Updated: 2025/02/12 12:35:56 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,3 @@ int	ft_atoi(const char *str)
 	}
 	return (nb * sign);
 }
-/*
-#include <stdio.h>
-
-int	main(int argc, char **argv)
-{
-	if (argc > 1)
-	{
-		printf("%d", ft_atoi(argv[1]));
-	}
-}
-*/
