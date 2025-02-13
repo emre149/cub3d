@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/02/12 12:56:41 by ededemog         ###   ########.fr        #
+#    Updated: 2025/02/12 22:20:13 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC_FILES := main.c \
              parsing/parse_config.c \
 			 parsing/parse_map.c \
              utils/map_utils.c \
+			 rendering/render_map.c \
 
 SRC := $(addprefix $(SRCDIR), $(SRC_FILES))
 

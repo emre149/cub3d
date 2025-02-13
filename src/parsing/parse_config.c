@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:34:03 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/12 22:09:08 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/12 22:31:41 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ static int	process_config_line(t_map_info *map_info, char *line)
 	else if (is_map_line(line))
 	{
 		parse_map_only(map_info);
+		
 		return (2);
 	}
 	return (1);

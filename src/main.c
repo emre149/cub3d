@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/12 12:36:48 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/12 22:35:11 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int ac, char **av)
 		write(2, "Error: Failed to parse map file\n", 32);
 		return (1);
 	}
+	detect_player(&map_info);
 	data.mlx = mlx_init();
 	if (!data.mlx)
 		return (1);
@@ -61,6 +62,7 @@ int	main(int ac, char **av)
 	}
 	mlx_hook(data.win, 17, 0, close_window, &data);
 	mlx_key_hook(data.win, key_hook, &data);
+	render_map(&data, &map_info);
 	mlx_loop(data.mlx);
 	return (0);
 }

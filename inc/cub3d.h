@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/12 12:53:44 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/12 22:35:05 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int			parse_config(t_map_info *map_info);
 void		parse_color(int *color, char *line);
 void		parse_texture(char **texture, char *line);
 void		parse_resolution(t_map_info *map_info, char *line);
+void 		detect_player(t_map_info *map_info);
+
 
 int			is_map_line(char *line);
 void		parse_map_only(t_map_info *map_info);
@@ -69,5 +71,10 @@ int			is_valid_map_file(char *filename);
 // parsing utils
 
 void		free_map(char **map);
+
+// rendering
+
+void	draw_square(t_data *data, int x, int y, int color);
+void	render_map(t_data *data, t_map_info *map_info);
 
 #endif
