@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/07 15:53:33 by ededemog          #+#    #+#              #
-#    Updated: 2025/02/11 16:11:58 by ededemog         ###   ########.fr        #
+#    Updated: 2025/02/26 21:02:52 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ SRCS = basics/ft_atoi.c basics/ft_isalnum.c basics/ft_isalpha.c \
 		list/ft_lstadd_back.c list/ft_lstdelone.c list/ft_lstclear.c \
 		list/ft_lstiter.c list/ft_lstmap.c gnl/get_next_line.c \
 		gnl/get_next_line_utils.c memory/ft_realloc.c \
-		memory/ft_memdel.c
+		memory/ft_memdel.c string/ft_strcmp.c 
 
 MAIN	=	main.c
 

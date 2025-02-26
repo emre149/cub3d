@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 15:45:17 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/26 21:43:59 by ededemog         ###   ########.fr       */
+/*   Created: 2025/02/26 21:02:10 by ededemog          #+#    #+#             */
+/*   Updated: 2025/02/26 21:02:17 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/cub3d.h"
+#include "../libft.h"
 
-void	free_map(char **map)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int	i;
-
-	i = 0;
-	while (map[i])
+	while (*s1 && *s2 && *s1 == *s2)
 	{
-		free(map[i]);
-		i++;
+		s1++;
+		s2++;
 	}
-	free(map);
-}
-void	free_tokens(char **tokens)
-{
-	int	i;
-
-	i = 0;
-	while (tokens[i])
-	{
-		free(tokens[i]);
-		i++;
-	}
-	free(tokens);
+	return ((unsigned char)*s1 - (unsigned char)*s2);
 }

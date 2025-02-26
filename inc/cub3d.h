@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/12 22:35:05 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/26 21:44:28 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <unistd.h>
 
 # define ESC 65307
+# define MINI_MAP_SCALE 5
 
 typedef struct s_data
 {
@@ -71,10 +72,16 @@ int			is_valid_map_file(char *filename);
 // parsing utils
 
 void		free_map(char **map);
+void		free_tokens(char **tokens);
 
 // rendering
 
 void	draw_square(t_data *data, int x, int y, int color);
 void	render_map(t_data *data, t_map_info *map_info);
+
+// parsing validation
+
+int is_valid_texture_file(char *path);
+int validate_textures(t_map_info *map_info);
 
 #endif

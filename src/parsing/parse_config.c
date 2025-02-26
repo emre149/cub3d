@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:34:03 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/12 22:31:41 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/26 21:42:13 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,14 @@ int	parse_config(t_map_info *map_info)
 		ret = process_config_line(map_info, line);
 		if (ret == 2)
 			break ;
+		if (ret == 0)
+			return (0);
 		i++;
+	}
+	if (!validate_textures(map_info))
+	{
+		printf("Error: Problème de validation des textures.\n");
+		return (0);
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/02/12 22:20:13 by ededemog         ###   ########.fr        #
+#    Updated: 2025/02/26 20:03:03 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC_FILES := main.c \
              parsing/read_map.c \
              parsing/parse_config.c \
 			 parsing/parse_map.c \
+			 parsing/assets_check.c \
              utils/map_utils.c \
 			 rendering/render_map.c \
 
