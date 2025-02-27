@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/26 20:13:42 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:29:59 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,12 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	ft_memset(&map_info, 0, sizeof(t_map_info));
-	if (!read_map_file(&map_info, av[1]) || !parse_config(&map_info))
+	if (!read_map_file(&map_info, av[1]))
+	{
+		write(2, "Error: Failed to read map file\n", 32);
+		return (1);
+	}
+	if (!parse_config(&map_info))
 	{
 		write(2, "Error: Failed to parse map file\n", 32);
 		return (1);
@@ -52,9 +57,10 @@ int	main(int ac, char **av)
 	detect_player(&map_info);
 	data.mlx = mlx_init();
 	if (!data.mlx)
+	{
 		return (1);
-	data.win = mlx_new_window(data.mlx, map_info.map_width, map_info.map_height,
-			"Cub3D");
+	}
+	data.win = mlx_new_window(data.mlx, map_info.map_width, map_info.map_height, "Cub3D");
 	if (!data.win)
 	{
 		free(data.mlx);

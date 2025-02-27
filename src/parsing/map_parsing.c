@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/11 12:58:23 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/12 22:09:57 by ededemog         ###   ########.fr       */
+/*   Created: 2025/02/27 17:36:31 by ededemog          #+#    #+#             */
+/*   Updated: 2025/02/27 17:37:06 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-int	is_valid_map_file(char *filename)
-{
-	int	len;
-
-	len = strlen(filename);
-	return (len > 4 && strcmp(filename + len - 4, ".cub") == 0);
-}
 
 static int	add_line(char ***lines, int *count, char *line)
 {

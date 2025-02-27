@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/02/26 20:03:03 by ededemog         ###   ########.fr        #
+#    Updated: 2025/02/27 17:45:43 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,14 @@ INCDIR := ./inc/mlx/ ./inc/mlx-mac/ ./inc/
 LIBFT_PATH := ./inc/libft
 
 SRC_FILES := main.c \
-             parsing/read_map.c \
+             parsing/assets_validation.c \
+             parsing/colors_validation.c \
+			 parsing/map_parsing.c \
+			 parsing/map_validation.c \
              parsing/parse_config.c \
-			 parsing/parse_map.c \
-			 parsing/assets_check.c \
-             utils/map_utils.c \
+			 parsing/parse_elements.c \
+			 parsing/validation.c \
+			 utils/map_utils.c \
 			 rendering/render_map.c \
 
 SRC := $(addprefix $(SRCDIR), $(SRC_FILES))

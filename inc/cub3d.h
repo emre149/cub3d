@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/26 21:44:28 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:45:08 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int			key_hook(int keycode, t_data *data);
 // parsing
 
 int			parse_config(t_map_info *map_info);
-void		parse_color(int *color, char *line);
-void		parse_texture(char **texture, char *line);
+int			parse_color(int *color, char *line, char *identifier);
+int			parse_texture(char **texture, char *line, char *identifier);
 void		parse_resolution(t_map_info *map_info, char *line);
 void 		detect_player(t_map_info *map_info);
 
@@ -68,6 +68,8 @@ void		parse_map_only(t_map_info *map_info);
 
 int			read_map_file(t_map_info *map_info, char *file_path);
 int			is_valid_map_file(char *filename);
+int			check_required_elements(t_map_info *map_info);
+int			check_color_format(char *line, char *identifier);
 
 // parsing utils
 
