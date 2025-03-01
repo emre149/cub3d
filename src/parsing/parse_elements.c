@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:08:31 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/27 17:46:38 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:17:54 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,27 +81,21 @@ int	parse_color(int *color, char *line, char *identifier)
 
 int	is_map_line(char *line)
 {
-	char	*trimmed;
-	int		i;
-	int		valid;
+	int	i;
+	int	valid;
 
-	trimmed = ft_strtrim(line, " \t\n");
-	if (!trimmed)
+	if (!line || !*line)
 		return (0);
 	i = 0;
 	valid = 0;
-	while (trimmed[i])
+	while (line[i])
 	{
-		if (trimmed[i] == '1' || trimmed[i] == '0' || trimmed[i] == 'N'
-			|| trimmed[i] == 'S' || trimmed[i] == 'E' || trimmed[i] == 'W')
+		if (line[i] == '1')
 			valid = 1;
-		else if (trimmed[i] != ' ')
-		{
-			free(trimmed);
+		else if (line[i] != '0' && line[i] != ' ' && line[i] != 'N'
+			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
 			return (0);
-		}
 		i++;
 	}
-	free(trimmed);
 	return (valid);
 }

@@ -6,11 +6,30 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:36:31 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/27 17:37:06 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:17:47 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
+
+static char	*clean_line(char *line)
+{
+	int		i;
+	char	*cleaned;
+
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\n')
+			line[i] = '\0';
+		i++;
+	}
+	cleaned = ft_strtrim(line, " \t");
+	free(line);
+	return (cleaned);
+}
 
 static int	add_line(char ***lines, int *count, char *line)
 {
@@ -40,6 +59,7 @@ int	read_map_file(t_map_info *map_info, char *file_path)
 {
 	int		fd;
 	char	*line;
+	char	*cleaned_line;
 	char	**lines;
 	int		count;
 
@@ -54,8 +74,14 @@ int	read_map_file(t_map_info *map_info, char *file_path)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (!add_line(&lines, &count, line))
-			return (close_return(fd));
+		cleaned_line = clean_line(line);
+		if (cleaned_line && *cleaned_line)
+		{
+			if (!add_line(&lines, &count, cleaned_line))
+				return (close_return(fd));
+		}
+		else
+			free(cleaned_line);
 		line = get_next_line(fd);
 	}
 	close(fd);

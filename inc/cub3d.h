@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/27 17:45:08 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:04:34 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define ESC 65307
 # define MINI_MAP_SCALE 5
+
+// structs
 
 typedef struct s_data
 {
@@ -51,39 +53,41 @@ typedef struct s_map_info
 }			t_map_info;
 
 // main
+
 int			close_window(t_data *data);
 int			key_hook(int keycode, t_data *data);
 
-// parsing
+// file handling parsing
 
+int			is_valid_map_file(char *filename);
+int			read_map_file(t_map_info *map_info, char *file_path);
 int			parse_config(t_map_info *map_info);
-int			parse_color(int *color, char *line, char *identifier);
-int			parse_texture(char **texture, char *line, char *identifier);
+
+// elements parsing
+
 void		parse_resolution(t_map_info *map_info, char *line);
-void 		detect_player(t_map_info *map_info);
-
-
+int			parse_texture(char **texture, char *line, char *identifier);
+int			parse_color(int *color, char *line, char *identifier);
 int			is_map_line(char *line);
 void		parse_map_only(t_map_info *map_info);
 
-int			read_map_file(t_map_info *map_info, char *file_path);
-int			is_valid_map_file(char *filename);
+// map validation
+
 int			check_required_elements(t_map_info *map_info);
 int			check_color_format(char *line, char *identifier);
+int			is_valid_texture_file(char *path);
+int			validate_textures(t_map_info *map_info);
+int			validate_map(t_map_info *map_info);
+void		detect_player(t_map_info *map_info);
 
-// parsing utils
+// utils
 
 void		free_map(char **map);
 void		free_tokens(char **tokens);
 
 // rendering
 
-void	draw_square(t_data *data, int x, int y, int color);
-void	render_map(t_data *data, t_map_info *map_info);
-
-// parsing validation
-
-int is_valid_texture_file(char *path);
-int validate_textures(t_map_info *map_info);
+void		draw_square(t_data *data, int x, int y, int color);
+void		render_map(t_data *data, t_map_info *map_info);
 
 #endif

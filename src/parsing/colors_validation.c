@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:06:50 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/27 17:43:53 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/01 16:17:45 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ int	check_color_format(char *line, char *identifier)
 	comma_count = count_commas(&line[i]);
 	if (comma_count != 2)
 	{
-		write(2, "Error: Format RGB invalide pour ", 33);
-		write(2, identifier, ft_strlen(identifier));
-		write(2, ". Format attendu: R,G,B\n", 24);
+		printf("Error: Format RGB invalide pour %s. Format attendu: R,G,B\n",
+			identifier);
 		return (0);
 	}
 	digit_sections = 0;
@@ -60,17 +59,15 @@ int	check_color_format(char *line, char *identifier)
 			i++;
 		else
 		{
-			write(2, "Error: Caractère invalide dans le format RGB pour ", 50);
-			write(2, identifier, ft_strlen(identifier));
-			write(2, "\n", 1);
+			printf("Error: Caractère invalide dans le format RGB pour %s\n",
+				identifier);
 			return (0);
 		}
 	}
 	if (digit_sections != 3)
 	{
-		write(2, "Error: Format RGB invalide pour ", 33);
-		write(2, identifier, ft_strlen(identifier));
-		write(2, ". Format attendu: R,G,B\n", 24);
+		printf("Error: Format RGB invalide pour %s. Format attendu: R,G,B\n",
+			identifier);
 		return (0);
 	}
 	return (1);
