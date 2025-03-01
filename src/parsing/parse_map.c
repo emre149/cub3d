@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:34:15 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/12 22:30:35 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/01 17:32:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 static int	get_map_bounds(char **map, int *start, int *end)
 {
@@ -50,7 +50,9 @@ static char	**duplicate_map_lines(char **map, int start, int end)
 		new_map[j] = ft_strdup(map[i]);
 		if (!new_map[j])
 		{
-			free_map(new_map);
+			while (j > 0)
+				free(new_map[--j]);
+			free(new_map);
 			return (NULL);
 		}
 		i++;
@@ -106,9 +108,13 @@ int	is_map_line(char *line)
 
 void detect_player(t_map_info *map_info)
 {
-    int i = 0;
+    int i;
     int j;
 
+    if (!map_info || !map_info->map)
+        error_exit(map_info, "No map loaded");
+        
+    i = 0;
     while (map_info->map[i])
     {
         j = 0;
@@ -117,13 +123,14 @@ void detect_player(t_map_info *map_info)
             if (map_info->map[i][j] == 'N' || map_info->map[i][j] == 'S' ||
                 map_info->map[i][j] == 'E' || map_info->map[i][j] == 'W')
             {
-                // On stocke la position en pixels, ici en multipliant par 10 (selon la taille de tes cases)
-                map_info->player_x = j * 10;
-                map_info->player_y = i * 10;
+                map_info->player_x = j;
+                map_info->player_y = i;
                 map_info->player_dir = map_info->map[i][j];
+                return;
             }
             j++;
         }
         i++;
     }
+    error_exit(map_info, "No player found in map");
 }

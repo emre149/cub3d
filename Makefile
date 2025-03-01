@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/02/18 17:11:50 by marvin           ###   ########.fr        #
+#    Updated: 2025/02/27 16:58:33 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,15 @@ SRC_FILES := main.c \
 			 parsing/parse_map.c \
              utils/map_utils.c \
 			 rendering/render_map.c \
+			 raycasting/raycasting.c \
+			 raycasting/utils.c \
+			 movement/movement.c \
+			 movement/rotate.c \
+			 movement/handle_keys.c \
+			 error.c \
+			 inits/init_all.c \
+			 inits/init.c \
+			 
 
 SRC := $(addprefix $(SRCDIR), $(SRC_FILES))
 

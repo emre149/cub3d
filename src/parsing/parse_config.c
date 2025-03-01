@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_config.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:34:03 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/12 22:31:41 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/01 17:32:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	parse_resolution(t_map_info *map_info, char *line)
 {
@@ -29,12 +29,11 @@ void	parse_resolution(t_map_info *map_info, char *line)
 
 void	parse_texture(char **texture, char *line)
 {
-	int	i;
-
-	i = 2;
-	while (line[i] == ' ')
-		i++;
-	*texture = ft_strdup(&line[i]);
+	if (*texture)
+		free(*texture);
+	*texture = ft_strdup(line);
+	if (!*texture)
+		error_exit(NULL, "Failed to allocate memory for texture");
 }
 
 void	parse_color(int *color, char *line)
