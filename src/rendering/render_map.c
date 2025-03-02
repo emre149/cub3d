@@ -6,13 +6,13 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 22:17:14 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/13 22:48:32 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:59:27 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_square(t_data *data, int x, int y, int color)
+void	draw_square(t_map_info *data, int x, int y, int color)
 {
 	int	i;
 	int	j;
@@ -30,7 +30,7 @@ void	draw_square(t_data *data, int x, int y, int color)
 	}
 }
 
-void	render_map(t_data *data, t_map_info *map_info)
+void	render_map(t_map_info *map_info)
 {
 	int x;
 	int y;
@@ -46,9 +46,9 @@ void	render_map(t_data *data, t_map_info *map_info)
 		while (map_info->map[i][j])
 		{
 			if (map_info->map[i][j] == '1')
-				draw_square(data, x, y, 0xFFFFFF);
+				draw_square(map_info, x, y, 0xFFFFFF);
 			else if (map_info->map[i][j] == '0')
-				draw_square(data, x, y, 0x000000);
+				draw_square(map_info, x, y, 0x000000);
 			x += 10;
 			j++;
 		}

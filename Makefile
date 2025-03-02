@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/02/27 17:45:43 by ededemog         ###   ########.fr        #
+#    Updated: 2025/03/02 15:35:04 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,15 @@ SRC_FILES := main.c \
              parsing/parse_config.c \
 			 parsing/parse_elements.c \
 			 parsing/validation.c \
-			 utils/map_utils.c \
+			 utils/utils.c \
+			 utils/raycasting_utils.c \
 			 rendering/render_map.c \
+			 rendering/raycasting.c \
+			 moves/handle_keys.c \
+			 moves/movements.c \
+			 moves/rotate.c \
+			 init/init.c \
+			 init/init_all.c \
 
 SRC := $(addprefix $(SRCDIR), $(SRC_FILES))
 

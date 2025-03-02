@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 19:52:34 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/01 15:24:20 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/02 14:23:24 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,19 @@ int	is_valid_texture_file(char *path)
 	if (!trimmed_path || !*trimmed_path)
 	{
 		free(trimmed_path);
-		printf("Error: Chemin de texture vide.\n");
+		write(2, "Error: Chemin de texture vide.\n", 32);
 		return (0);
 	}
-	printf("Vérification du chemin : '%s'\n", trimmed_path);
+	write(1, "Vérification du chemin : '", 27);
+	write(1, trimmed_path, ft_strlen(trimmed_path));
+	write(1, "'\n", 2);
 
 	fd = open(trimmed_path, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Error: Fichier de texture introuvable : %s\n", trimmed_path);
+		write(2, "Error: Fichier de texture introuvable : ", 40);
+		write(2, trimmed_path, ft_strlen(trimmed_path));
+		write(2, "\n", 1);
 		free(trimmed_path);
 		return (0);
 	}
@@ -39,8 +43,11 @@ int	is_valid_texture_file(char *path)
 	len = ft_strlen(trimmed_path);
 	result = (len >= 4 && ft_strcmp(trimmed_path + len - 4, ".xpm") == 0);
 	if (!result)
-		printf("Error: Format de texture invalide (uniquement .xpm) : %s\n",
-			trimmed_path);
+	{
+		write(2, "Error: Format de texture invalide (uniquement .xpm) : ", 54);
+		write(2, trimmed_path, ft_strlen(trimmed_path));
+		write(2, "\n", 1);
+	}
 
 	close(fd);
 	free(trimmed_path);

@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:37:30 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/01 16:17:37 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/02 16:25:19 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,46 @@ static void	restore_player(t_map_info *map_info)
 		map_info->map[i][j] = map_info->player_dir;
 }
 
+static void init_player_direction(t_map_info *map_info)
+{
+    if (map_info->player_dir == 'N')
+    {
+        map_info->dir[X] = 0;
+        map_info->dir[Y] = -1;
+        map_info->plane[X] = 0.66;
+        map_info->plane[Y] = 0;
+    }
+    else if (map_info->player_dir == 'S')
+    {
+        map_info->dir[X] = 0;
+        map_info->dir[Y] = 1;
+        map_info->plane[X] = -0.66;
+        map_info->plane[Y] = 0;
+    }
+    else if (map_info->player_dir == 'E')
+    {
+        map_info->dir[X] = 1;
+        map_info->dir[Y] = 0;
+        map_info->plane[X] = 0;
+        map_info->plane[Y] = 0.66;
+    }
+    else if (map_info->player_dir == 'W')
+    {
+        map_info->dir[X] = -1;
+        map_info->dir[Y] = 0;
+        map_info->plane[X] = 0;
+        map_info->plane[Y] = -0.66;
+    }
+    
+    map_info->dir_x = map_info->dir[X];
+    map_info->dir_y = map_info->dir[Y];
+    map_info->plane_x = map_info->plane[X];
+    map_info->plane_y = map_info->plane[Y];
+    
+    map_info->pos[X] = (double)map_info->player_x / 10;
+    map_info->pos[Y] = (double)map_info->player_y / 10;
+}
+
 int	validate_map(t_map_info *map_info)
 {
 	if (!map_info->map)
@@ -237,6 +277,8 @@ int	validate_map(t_map_info *map_info)
 	}
 
 	restore_player(map_info);
+	
+	init_player_direction(map_info);
 
 	return (1);
 }
