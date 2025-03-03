@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/03/02 15:35:04 by ededemog         ###   ########.fr        #
+#    Updated: 2025/03/03 18:08:32 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ SRC_FILES := main.c \
 			 moves/rotate.c \
 			 init/init.c \
 			 init/init_all.c \
+			 rendering/mini_map.c \
+			 utils/mini_map_utils.c \
 
 SRC := $(addprefix $(SRCDIR), $(SRC_FILES))
 

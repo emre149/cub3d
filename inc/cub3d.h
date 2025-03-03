@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/02 14:39:43 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/03 18:09:35 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define R_SPEED 0.04
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
+# define MINI_MAP_SCALE 10
 
 /*
 ** Structures
@@ -116,6 +117,16 @@ typedef struct s_map_info
 	int		rot_left;
 	int		rot_right;
 }			t_map_info;
+
+/* Brensenham */
+typedef struct s_line_params
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+}		t_line_params;
 
 /*
 ** Main
@@ -195,4 +206,13 @@ int			moves(t_map_info *map_info);
 int			destroy_game(t_map_info *map_info);
 int			key_release(int keycode, t_map_info *map_info);
 
+/*
+** Mini map
+*/
+
+void	draw_mini_map(t_map_info *data, t_map_info *map_info);
+void	draw_line_minimap(t_map_info *data, int x0, int y0, int x1, int y1, 
+		int color);
+void	draw_player_dir(t_map_info *data, t_map_info *map_info);
+void	draw_player_dot(t_map_info *data, int player_x, int player_y);
 #endif

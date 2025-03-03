@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 15:14:59 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/02 16:25:33 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:34:55 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ void	raycasting(t_map_info *map_info)
 	}
 	add_img(map_info, buff, &img);
 	clean_buff(buff);
+	draw_mini_map(map_info, map_info);
 }
