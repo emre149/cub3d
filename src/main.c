@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/02 16:38:38 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:10:33 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int	main(int ac, char **av)
 		free_and_exit(&map_info, "Error: Failed to read map file\n");
 	if (!parse_config(&map_info))
 		free_and_exit(&map_info, "Error: Failed to parse map file\n");
-	
 	launch_game(&map_info);
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emre149 <emre149@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 04:00:29 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/10 16:39:57 by emre149          ###   ########.fr       */
+/*   Updated: 2025/03/03 15:49:59 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	line_allocation(char **line, t_glist *stash)
 	*line = malloc(sizeof(char) * (len + 1));
 }
 
-/* Frees the entire stash. */
-
 void	free_stash(t_glist *stash)
 {
 	t_glist	*current;
@@ -70,9 +68,10 @@ void	free_stash(t_glist *stash)
 		current = next;
 	}
 }
+
 t_glist	*ft_glistlast(t_glist *lst)
 {
-    while (lst && lst->next)
-        lst = lst->next;
-    return (lst);
+	while (lst && lst->next)
+		lst = lst->next;
+	return (lst);
 }

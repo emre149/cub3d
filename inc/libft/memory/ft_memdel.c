@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:20:48 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/11 16:18:31 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:04:32 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_memdel(void **ap)
 {
-    if (ap && *ap)
-    {
-        free(*ap);
-        *ap = NULL;
-    }
+	if (ap && *ap)
+	{
+		free(*ap);
+		*ap = NULL;
+	}
 }

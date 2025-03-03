@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:36:31 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/01 16:17:47 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:17:06 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,26 @@ static char	*clean_line(char *line)
 static int	add_line(char ***lines, int *count, char *line)
 {
 	char	**temp;
+	int		i;
 
-	temp = (char **)ft_realloc(*lines, (*count + 2) * sizeof(char *));
+	temp = (char **)malloc((*count + 2) * sizeof(char *));
 	if (!temp)
 	{
 		free_map(*lines);
 		free(line);
 		return (0);
 	}
+	i = 0;
+	while (i < *count)
+	{
+		temp[i] = (*lines)[i];
+		i++;
+	}
+	temp[*count] = line;
+	temp[*count + 1] = NULL;
+	if (*lines)
+		free(*lines);
 	*lines = temp;
-	(*lines)[*count] = line;
-	(*lines)[*count + 1] = NULL;
 	(*count)++;
 	return (1);
 }

@@ -6,13 +6,13 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:28:31 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/26 11:36:47 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:34:07 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-void	draw_mini_map(t_data *data, t_map_info *map_info)
+void	draw_mini_map(t_map_info *data, t_map_info *map_info)
 {
 	int	i;
 	int	j;

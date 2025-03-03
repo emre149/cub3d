@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/09 16:59:00 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/11 15:27:58 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:08:23 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	digits(long int nb)
 
 	len = 0;
 	if (nb == 0)
-		return (0);
+		return (1);
 	if (nb < 0)
 	{
 		nb *= -1;
@@ -32,43 +32,41 @@ static int	digits(long int nb)
 	return (len);
 }
 
+static void	fill_number(char *str, long int nb, int len)
+{
+	int	i;
+
+	i = len - 1;
+	while (nb > 0)
+	{
+		str[i--] = nb % 10 + '0';
+		nb /= 10;
+	}
+	str[len] = '\0';
+}
+
 char	*ft_itoa(int n)
 {
-	char		*new;
+	char		*str;
 	int			len;
-	int			i;
 	long int	nb;
 
 	nb = n;
-	len = digits(n);
+	len = digits(nb);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
 	if (nb == 0)
 	{
-		new = malloc(sizeof(char) * 2);
-		if (!new)
-			return (NULL);
-		new[0] = '0';
-		new[1] = '\0';
-		return (new);
+		str[0] = '0';
+		str[1] = '\0';
+		return (str);
 	}
-	new = malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return (NULL);
-	//new[len] = '\0';
-	else
+	if (nb < 0)
 	{
-		if (nb < 0)
-		{
-			new[0] = '-';
-			nb *= -1;
-		}
-		i = len - 1;
-		while (nb > 0)
-		{
-			new[i] = nb % 10 + '0';
-			i--;
-			nb /= 10;
-		}
-		new[len] = '\0';
+		str[0] = '-';
+		nb *= -1;
 	}
-	return (new);
+	fill_number(str, nb, len);
+	return (str);
 }

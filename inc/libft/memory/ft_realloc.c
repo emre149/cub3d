@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:17:25 by ededemog          #+#    #+#             */
-/*   Updated: 2025/02/11 16:18:16 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:16:22 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ char	*ft_realloc(void *ptr, size_t size)
 
 	if (!ptr)
 		return (malloc(size));
-	if (!size)
+	if (size == 0)
 	{
-		ft_memdel(&ptr);
-		return (ptr);
+		free(ptr);
+		return (NULL);
 	}
 	new = malloc(size);
 	if (!new)
 		return (NULL);
-	ft_memcpy(new, ptr, size);
-	ft_memdel(&ptr);
+	free(ptr);
 	return (new);
 }
