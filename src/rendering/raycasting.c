@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 15:14:59 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 17:34:55 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:00:59 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,58 @@ void	raycasting(t_map_info *map_info)
 	add_img(map_info, buff, &img);
 	clean_buff(buff);
 	draw_mini_map(map_info, map_info);
+}
+
+void test_single_texture(t_map_info *map_info, int texture_id)
+{
+    t_img img;
+    int x, y;
+    int width, height;
+    
+    // Vérifier si la texture existe
+    if (!map_info->assets[texture_id]) {
+        printf("Texture %d n'est pas chargée\n", texture_id);
+        return;
+    }
+    
+    // Récupérer les dimensions de la texture
+    width = IMG_SIZE;
+    height = IMG_SIZE;
+    
+    printf("Affichage de la texture %d: largeur=%d, hauteur=%d\n", 
+           texture_id, width, height);
+    
+    // Créer une nouvelle image
+    ft_bzero(&img, sizeof(t_img));
+    img.img_mlx = mlx_new_image(map_info->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
+    img.addr = (int *)mlx_get_data_addr(img.img_mlx, &img.bits_per_pixel, 
+                                        &img.line_length, &img.endian);
+    
+    // Remplir l'écran avec la texture répétée
+    for (y = 0; y < SCREEN_HEIGHT; y++)
+    {
+        for (x = 0; x < SCREEN_WIDTH; x++)
+        {
+            // Calculer les coordonnées de texture (répétition)
+            int tex_x = x % width;
+            int tex_y = y % height;
+            
+            // Calculer l'index dans le tableau de texture
+            int tex_index = tex_y * width + tex_x;
+            
+            // Vérifier que l'index est valide
+            if (tex_index >= 0 && tex_index < width * height) {
+                // Récupérer la couleur et l'appliquer
+                int color = map_info->assets[texture_id][tex_index];
+                img.addr[y * (img.line_length / 4) + x] = color;
+            } else {
+                // Couleur d'erreur
+                img.addr[y * (img.line_length / 4) + x] = 0xFF00FF; // Rose
+            }
+        }
+    }
+    
+    // Afficher l'image
+    mlx_put_image_to_window(map_info->mlx, map_info->win, img.img_mlx, 0, 0);
+    mlx_destroy_image(map_info->mlx, img.img_mlx);
 }

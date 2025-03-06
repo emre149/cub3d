@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 17:23:47 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:08:37 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ int	main(int ac, char **av)
 {
 	t_map_info	map_info;
 
+	map_info.no_texture = NULL;
+	map_info.so_texture = NULL;
+	map_info.we_texture = NULL;
+	map_info.ea_texture = NULL;
+	map_info.sprite = NULL;
 	if (ac != 2)
 	{
 		write(2, "Usage: ./cub3D <map.cub>\n", 25);

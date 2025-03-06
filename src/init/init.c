@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:25:18 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 16:29:03 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:45:04 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,42 +53,71 @@ void	xpm_to_img(t_map_info *map_info, t_img *img, char *tex)
 			&img->line_length, &img->endian);
 }
 
+static void	init_plane(t_map_info *map_info, char c)
+{
+	if (c == 'S')
+	{
+		map_info->plane[0] = -0.66;
+		map_info->plane[1] = 0;
+	}
+	if (c == 'N')
+	{
+		map_info->plane[0] = 0.66;
+		map_info->plane[1] = 0;
+	}
+	if (c == 'E')
+	{
+		map_info->plane[0] = 0;
+		map_info->plane[1] = 0.66;
+	}
+	if (c == 'W')
+	{
+		map_info->plane[0] = 0;
+		map_info->plane[1] = -0.66;
+	}
+}
+
+static void	init_spawn(int y, int x, char c, t_map_info *map_info)
+{
+	map_info->pos[0] = (double)x + 0.5;
+	map_info->pos[1] = (double)y + 0.5;
+	if (c == 'S')
+	{
+		map_info->dir[0] = 0;
+		map_info->dir[1] = 1;
+	}
+	else if (c == 'N')
+	{
+		map_info->dir[0] = 0;
+		map_info->dir[1] = -1;
+	}
+	else if (c == 'E')
+	{
+		map_info->dir[0] = 1;
+		map_info->dir[1] = 0;
+	}
+	else if (c == 'W')
+	{
+		map_info->dir[0] = -1;
+		map_info->dir[1] = 0;
+	}
+	init_plane(map_info, c);
+}
+
 void	map_pos(t_map_info *map_info)
 {
-	map_info->pos[X] = (double)map_info->player_x / 10;
-	map_info->pos[Y] = (double)map_info->player_y / 10;
+	int	i;
+	int	j;
 
-	if (map_info->player_dir == 'N')
+	i = -1;
+	while (map_info->map[++i])
 	{
-		map_info->dir[X] = 0;
-		map_info->dir[Y] = -1;
-		map_info->plane[X] = 0.66;
-		map_info->plane[Y] = 0;
+		j = -1;
+		while (map_info->map[i][++j])
+		{
+			if (map_info->map[i][j] == 'N' || map_info->map[i][j] == 'S'
+				|| map_info->map[i][j] == 'E' || map_info->map[i][j] == 'W')
+				init_spawn(i, j, map_info->map[i][j], map_info);
+		}
 	}
-	else if (map_info->player_dir == 'S')
-	{
-		map_info->dir[X] = 0;
-		map_info->dir[Y] = 1;
-		map_info->plane[X] = -0.66;
-		map_info->plane[Y] = 0;
-	}
-	else if (map_info->player_dir == 'E')
-	{
-		map_info->dir[X] = 1;
-		map_info->dir[Y] = 0;
-		map_info->plane[X] = 0;
-		map_info->plane[Y] = 0.66;
-	}
-	else if (map_info->player_dir == 'W')
-	{
-		map_info->dir[X] = -1;
-		map_info->dir[Y] = 0;
-		map_info->plane[X] = 0;
-		map_info->plane[Y] = -0.66;
-	}
-
-	map_info->dir_x = map_info->dir[X];
-	map_info->dir_y = map_info->dir[Y];
-	map_info->plane_x = map_info->plane[X];
-	map_info->plane_y = map_info->plane[Y];
 }
