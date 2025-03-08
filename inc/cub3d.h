@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 18:09:35 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:07:27 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,4 +215,10 @@ void	draw_line_minimap(t_map_info *data, int x0, int y0, int x1, int y1,
 		int color);
 void	draw_player_dir(t_map_info *data, t_map_info *map_info);
 void	draw_player_dot(t_map_info *data, int player_x, int player_y);
+
+
+
+
+
+void test_single_texture(t_map_info *map_info, int texture_id);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:25:44 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/04 15:32:00 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:27:25 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	launch_game(t_map_info *map_info)
 	init_mlx(map_info);
 	map_pos(map_info);
 	init_textures(map_info);
+	test_single_texture(map_info, NO);
 	map_info->move[X] = 0;
 	map_info->move[Y] = 0;
 	map_info->moved = 0;
