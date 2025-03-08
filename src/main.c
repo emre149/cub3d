@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 17:23:47 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:12:01 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	free_and_exit(t_map_info *map_info, char *error_msg)
 	if (map_info->sprite)
 		free(map_info->sprite);
 	if (error_msg)
-		write(2, error_msg, ft_strlen(error_msg));
+		printf("%s", error_msg);
 	exit(1);
 }
 
@@ -46,12 +46,12 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		write(2, "Usage: ./cub3D <map.cub>\n", 25);
+		printf("Error:\n Usage: ./cub3d map_file.cub\n");
 		return (1);
 	}
 	if (!is_valid_map_file(av[1]))
 	{
-		write(2, "Error: Invalid file extension. Use .cub\n", 40);
+		printf("Error:\n Invalid map file\n");
 		return (1);
 	}
 	ft_memset(&map_info, 0, sizeof(t_map_info));

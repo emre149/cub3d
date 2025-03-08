@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:25:18 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 16:29:03 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:31:23 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ void	xpm_to_img(t_map_info *map_info, t_img *img, char *tex)
 			&img->height);
 	if (!img->img_mlx)
 	{
-		write(2, "Failed to load texture: ", 24);
-		write(2, tex, ft_strlen(tex));
-		write(2, "\n", 1);
+		printf("Error:\n Failed to load textures: %s\n", tex);
 		error_exit(map_info, "Texture loading failed");
 	}
 	img->addr = (int *)mlx_get_data_addr(img->img_mlx, &img->bits_per_pixel,

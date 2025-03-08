@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:37:30 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 16:11:51 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:24:32 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,7 @@ static int	check_valid_chars(char **map)
 				&& map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'E'
 				&& map[i][j] != 'W')
 			{
-				write(2, "Error: Caractère invalide '", 28);
-				ft_putchar_fd(map[i][j], 2);
-				write(2, "' en position [", 15);
-				ft_putnbr_fd(i, 2);
-				write(2, ",", 1);
-				ft_putnbr_fd(j, 2);
-				write(2, "]\n", 2);
+				printf("Error:\n Caractère invalide '%c' en position [%d,%d]\n", map[i][j], i, j);
 				return (0);
 			}
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
@@ -112,9 +106,7 @@ static int	check_valid_chars(char **map)
 	}
 	if (player_count != 1)
 	{
-		write(2, "Error: Nombre de joueurs incorrect (", 36);
-		ft_putnbr_fd(player_count, 2);
-		write(2, " trouvé).\n", 11);
+        printf("Error:\n Nombre de joueurs incorrect (%d trouvé).\n", player_count);
 		return (0);
 	}
 	return (1);
@@ -143,13 +135,7 @@ static int	is_surrounded(char **map, int i, int j)
 		new_j = j + directions[k][1];
 		if (is_empty_or_edge(map, new_i, new_j))
 		{
-			write(2, "Error: Carte non fermée en position [", 38);
-			ft_putnbr_fd(i, 2);
-			write(2, ",", 1);
-			ft_putnbr_fd(j, 2);
-			write(2, "] (caractère '", 14);
-			ft_putchar_fd(map[i][j], 2);
-			write(2, "').\n", 4);
+            printf("Error:\n Carte non fermée en position [%d,%d] (caractère '%c').\n", i, j, map[i][j]);
 			return (0);
 		}
 		k++;
@@ -259,7 +245,7 @@ int	validate_map(t_map_info *map_info)
 {
 	if (!map_info->map)
 	{
-		write(2, "Error: Aucune carte à valider.\n", 32);
+		printf("Error:\n Aucune carte à valider\n");
 		return (0);
 	}
 	if (!check_valid_chars(map_info->map))

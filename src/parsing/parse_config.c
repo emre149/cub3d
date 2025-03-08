@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:34:03 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 16:11:05 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:26:11 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ static int	process_config_line(t_map_info *map_info, char *line,
 {
 	if (*map_started && !is_map_line(line))
 	{
-		write(2, "Error: Information trouvée après le début de la carte.\n",
-			55);
+		printf("Error:\n Ligne d'info après la carte: %s\n", line);
 		return (0);
 	}
 	if (ft_strncmp(line, "R ", 2) == 0)
@@ -65,9 +64,7 @@ static int	process_config_line(t_map_info *map_info, char *line,
 	}
 	else if (line[0] != '\0')
 	{
-		write(2, "Error: Ligne non reconnue: ", 27);
-		write(2, line, ft_strlen(line));
-		write(2, "\n", 1);
+		printf("Error:\n Ligne non reconnue: %s\n", line);
 		return (0);
 	}
 	return (1);
@@ -101,12 +98,12 @@ int	parse_config(t_map_info *map_info)
 		return (0);
 	if (!validate_textures(map_info))
 	{
-		write(2, "Error: Problème de validation des textures.\n", 44);
+		printf("Error:\n Problème de validation des textures\n");
 		return (0);
 	}
 	if (!validate_map(map_info))
 	{
-		write(2, "Error: Problème de validation de la carte.\n", 43);
+		printf("Error:\n Problème de validation de la carte\n");
 		return (0);
 	}
 	return (1);

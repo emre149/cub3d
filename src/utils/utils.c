@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:45:17 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/02 15:12:15 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:30:18 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,9 +81,7 @@ void	free_all(t_map_info *map_info)
 
 void	error_exit(t_map_info *map_info, char *message)
 {
-	write(2, "Error\n", 6);
-	write(2, message, ft_strlen(message));
-	write(2, "\n", 1);
+	printf("Error:\n %s\n", message);
 	free_all(map_info);
 	exit(1);
 }

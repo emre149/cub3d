@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:25:44 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 17:23:00 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:32:00 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	init_textures(t_map_info *map_info)
 	map_info->assets = ft_calloc(5, sizeof(int *));
 	if (!map_info->assets)
 		error_exit(map_info, "Failed to allocate memory for textures array");
-	write(1, "Loading textures...\n", 20);
+	printf("Loading textures...\n");	
 	map_info->assets[NO] = stock_tmp(map_info, map_info->no_texture);
 	map_info->assets[SO] = stock_tmp(map_info, map_info->so_texture);
 	map_info->assets[WE] = stock_tmp(map_info, map_info->we_texture);
 	map_info->assets[EA] = stock_tmp(map_info, map_info->ea_texture);
-	write(1, "Textures loaded successfully.\n", 30);
+	printf("Textures loaded\n");
 }
 
 void	launch_game(t_map_info *map_info)

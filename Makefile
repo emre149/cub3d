@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/03/03 18:08:32 by ededemog         ###   ########.fr        #
+#    Updated: 2025/03/04 15:09:57 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ else
 endif
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g
+CFLAGS := -Wall -Wextra -Werror -g -O3
 
 RED := "\e[1;91m"
 GREEN := "\e[1;92m"

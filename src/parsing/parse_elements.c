@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:08:31 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/01 16:17:54 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/04 15:27:12 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	parse_texture(char **texture, char *line, char *identifier)
 		i++;
 	if (*texture != NULL)
 	{
-		write(2, "Error: Doublon de la texture ", 29);
-		write(2, identifier, ft_strlen(identifier));
-		write(2, " détecté.\n", 11);
+		printf("Error:\n Doublon de la texture %s détecté.\n", identifier);
 		return (0);
 	}
 	*texture = ft_strdup(&line[i]);
@@ -70,9 +68,7 @@ int	parse_color(int *color, char *line, char *identifier)
 	b = ft_atoi(&line[i]);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
 	{
-		write(2, "Error: Valeur RGB invalide pour ", 33);
-		write(2, identifier, ft_strlen(identifier));
-		write(2, ". Les valeurs doivent être entre 0 et 255.\n", 43);
+		printf("Error:\n Valeur RGB invalide pour %s. Les valeurs doivent être entre 0 et 255.\n", identifier);
 		return (0);
 	}
 	*color = (r << 16) | (g << 8) | b;
