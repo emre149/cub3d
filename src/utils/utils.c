@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:45:17 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/08 15:28:12 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:59:02 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	free_all(t_map_info *map_info)
 		free(map_info->ea_texture);
 	if (map_info->sprite)
 		free(map_info->sprite);
+	if (map_info->door_text)
+		free(map_info->door_text);
 	if (map_info->map)
 		free_map(map_info->map);
 	if (map_info->assets)

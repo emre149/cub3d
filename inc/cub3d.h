@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/06 17:07:27 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:58:35 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define SO 1
 # define WE 2
 # define EA 3
+# define DOOR 4
 # define X 0
 # define Y 1
 # define IMG_SIZE 64
@@ -43,6 +44,8 @@
 # define SCREEN_WIDTH 1280
 # define SCREEN_HEIGHT 720
 # define MINI_MAP_SCALE 10
+# define DOOR_OPEN 'D'
+# define DOOR_CLOSE 'd'
 
 /*
 ** Structures
@@ -116,17 +119,24 @@ typedef struct s_map_info
 	int		moved;
 	int		rot_left;
 	int		rot_right;
+
+	/* Portes */
+
+	char	*door_text;
+	int		door_state[1000][2];
+	int		door_count;
+	double	door_timer[1000];
 }			t_map_info;
 
 /* Brensenham */
 typedef struct s_line_params
 {
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-}		t_line_params;
+	int		dx;
+	int		dy;
+	int		sx;
+	int		sy;
+	int		err;
+}			t_line_params;
 
 /*
 ** Main
@@ -210,15 +220,21 @@ int			key_release(int keycode, t_map_info *map_info);
 ** Mini map
 */
 
-void	draw_mini_map(t_map_info *data, t_map_info *map_info);
-void	draw_line_minimap(t_map_info *data, int x0, int y0, int x1, int y1, 
-		int color);
-void	draw_player_dir(t_map_info *data, t_map_info *map_info);
-void	draw_player_dot(t_map_info *data, int player_x, int player_y);
+void		draw_mini_map(t_map_info *data, t_map_info *map_info);
+void		draw_line_minimap(t_map_info *data, int x0, int y0, int x1, int y1,
+				int color);
+void		draw_player_dir(t_map_info *data, t_map_info *map_info);
+void		draw_player_dot(t_map_info *data, int player_x, int player_y);
 
+/*
+** Doors
+*/
 
+void		init_doors(t_map_info *map_info);
+int			is_door(t_map_info *map_info, int x, int y);
+int			is_door_closed(t_map_info *map_info, int x, int y);
+int			find_door_index(t_map_info *map_info, int x, int y);
+void		toggle_door(t_map_info *map_info, int x, int y);
+void		interact_with_door(t_map_info *map_info);
 
-
-
-void test_single_texture(t_map_info *map_info, int texture_id);
 #endif

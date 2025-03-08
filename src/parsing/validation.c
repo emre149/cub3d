@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:03:37 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/04 15:29:53 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:55:24 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	detect_player(t_map_info *map_info)
     }
 }
 
-int	validate_textures(t_map_info *map_info)
+int validate_textures(t_map_info *map_info)
 {
     if (!map_info->no_texture || !is_valid_texture_file(map_info->no_texture))
         return (0);
@@ -80,6 +80,8 @@ int	validate_textures(t_map_info *map_info)
     if (!map_info->we_texture || !is_valid_texture_file(map_info->we_texture))
         return (0);
     if (!map_info->ea_texture || !is_valid_texture_file(map_info->ea_texture))
+        return (0);
+    if (map_info->door_text && !is_valid_texture_file(map_info->door_text))
         return (0);
     return (1);
 }

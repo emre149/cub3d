@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/08 15:28:28 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:05:21 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	main(int ac, char **av)
 	map_info.we_texture = NULL;
 	map_info.ea_texture = NULL;
 	map_info.sprite = NULL;
+	map_info.door_text = NULL;
 	if (ac != 2)
 	{
 		printf("Error:\n Usage: ./cub3d map_file.cub\n");

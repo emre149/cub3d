@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:37:30 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/04 15:24:32 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:52:05 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static int	check_valid_chars(char **map)
 		{
 			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != ' '
 				&& map[i][j] != 'N' && map[i][j] != 'S' && map[i][j] != 'E'
-				&& map[i][j] != 'W')
+				&& map[i][j] != 'W' && map[i][j] != 'D' && map[i][j] != 'd')
 			{
 				printf("Error:\n Caractère invalide '%c' en position [%d,%d]\n", map[i][j], i, j);
 				return (0);

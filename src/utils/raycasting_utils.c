@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 15:14:29 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/02 16:25:59 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:29:47 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,10 @@ int	**init_buff(t_map_info *map_info)
 void	init_ray(t_map_info *map_info, int x)
 {
 	map_info->camerax[X] = 2 * x / (double)SCREEN_WIDTH - 1;
-	map_info->ray_dir[X] = map_info->dir[X] + map_info->plane[X] * map_info->camerax[X];
-	map_info->ray_dir[Y] = map_info->dir[Y] + map_info->plane[Y] * map_info->camerax[X];
+	map_info->ray_dir[X] = map_info->dir[X] + map_info->plane[X]
+		* map_info->camerax[X];
+	map_info->ray_dir[Y] = map_info->dir[Y] + map_info->plane[Y]
+		* map_info->camerax[X];
 	map_info->map_p[X] = (int)map_info->pos[X];
 	map_info->map_p[Y] = (int)map_info->pos[Y];
 	map_info->ddist[X] = fabs(1 / map_info->ray_dir[X]);
@@ -52,22 +54,26 @@ void	step_sidedist(t_map_info *map_info)
 	if (map_info->ray_dir[X] < 0)
 	{
 		map_info->step[X] = -1;
-		map_info->side_dist[X] = (map_info->pos[X] - map_info->map_p[X]) * map_info->ddist[X];
+		map_info->side_dist[X] = (map_info->pos[X] - map_info->map_p[X])
+			* map_info->ddist[X];
 	}
 	else
 	{
 		map_info->step[X] = 1;
-		map_info->side_dist[X] = (map_info->map_p[X] + 1.0 - map_info->pos[X]) * map_info->ddist[X];
+		map_info->side_dist[X] = (map_info->map_p[X] + 1.0 - map_info->pos[X])
+			* map_info->ddist[X];
 	}
 	if (map_info->ray_dir[Y] < 0)
 	{
 		map_info->step[Y] = -1;
-		map_info->side_dist[Y] = (map_info->pos[Y] - map_info->map_p[Y]) * map_info->ddist[Y];
+		map_info->side_dist[Y] = (map_info->pos[Y] - map_info->map_p[Y])
+			* map_info->ddist[Y];
 	}
 	else
 	{
 		map_info->step[Y] = 1;
-		map_info->side_dist[Y] = (map_info->map_p[Y] + 1.0 - map_info->pos[Y]) * map_info->ddist[Y];
+		map_info->side_dist[Y] = (map_info->map_p[Y] + 1.0 - map_info->pos[Y])
+			* map_info->ddist[Y];
 	}
 }
 
@@ -88,10 +94,12 @@ void	algo_dda(t_map_info *map_info)
 			map_info->map_p[Y] += map_info->step[Y];
 			map_info->side = Y;
 		}
-		if (map_info->map_p[X] < 0 || map_info->map_p[X] >= map_info->map_width / 10 ||
-			map_info->map_p[Y] < 0 || map_info->map_p[Y] >= map_info->map_height / 10)
-			break;
-		if (map_info->map[map_info->map_p[Y]][map_info->map_p[X]] == '1')
+		if (map_info->map_p[X] < 0 || map_info->map_p[X] >= map_info->map_width
+			/ 10 || map_info->map_p[Y] < 0
+			|| map_info->map_p[Y] >= map_info->map_height / 10)
+			break ;
+		if (map_info->map[map_info->map_p[Y]][map_info->map_p[X]] == '1'
+			|| map_info->map[map_info->map_p[Y]][map_info->map_p[X]] == DOOR_CLOSE)
 			map_info->hit = 1;
 	}
 }
@@ -109,19 +117,26 @@ void	calc_dist(t_map_info *map_info)
 	map_info->draw_end = map_info->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (map_info->draw_end >= SCREEN_HEIGHT)
 		map_info->draw_end = SCREEN_HEIGHT - 1;
-	
-	if (map_info->side == 0)
+	if (map_info->map[map_info->map_p[Y]][map_info->map_p[X]] == DOOR_CLOSE)
 	{
-		if (map_info->ray_dir[X] < 0)
-			map_info->tex_num = WE;
-		else
-			map_info->tex_num = EA;
+		printf("Door detected at position [%d][%d]\n", map_info->map_p[Y], map_info->map_p[X]);
+		map_info->tex_num = DOOR;
 	}
 	else
 	{
-		if (map_info->ray_dir[Y] < 0)
-			map_info->tex_num = NO;
+		if (map_info->side == 0)
+		{
+			if (map_info->ray_dir[X] < 0)
+				map_info->tex_num = WE;
+			else
+				map_info->tex_num = EA;
+		}
 		else
-			map_info->tex_num = SO;
+		{
+			if (map_info->ray_dir[Y] < 0)
+				map_info->tex_num = NO;
+			else
+				map_info->tex_num = SO;
+		}
 	}
 }

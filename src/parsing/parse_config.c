@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:34:03 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/04 15:26:11 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:54:47 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ static int	process_config_line(t_map_info *map_info, char *line,
 	else if (ft_strncmp(line, "C ", 2) == 0)
 	{
 		if (!parse_color(&map_info->ceiling_color, line, "C"))
+			return (0);
+	}
+	else if (ft_strncmp(line, "DO ", 3) == 0)
+	{
+		if (!parse_texture(&map_info->door_text, line, "DO"))
 			return (0);
 	}
 	else if (is_map_line(line))
