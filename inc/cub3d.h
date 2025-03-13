@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/08 15:58:35 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:40:52 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@
 # define IMG_SIZE 64
 # define P_SPEED 0.03
 # define R_SPEED 0.04
-# define SCREEN_WIDTH 1280
-# define SCREEN_HEIGHT 720
+# define SCREEN_WIDTH 1920
+# define SCREEN_HEIGHT 1080
 # define MINI_MAP_SCALE 10
 # define DOOR_OPEN 'D'
 # define DOOR_CLOSE 'd'
@@ -60,6 +60,15 @@ typedef struct s_img
 	int		width;
 	int		height;
 }			t_img;
+
+typedef struct s_mouse
+{
+	int		prev_x;
+	int		x;
+	int		y;
+	int		is_captured;
+	int		moved;
+}			t_mouse;
 
 typedef struct s_map_info
 {
@@ -126,6 +135,9 @@ typedef struct s_map_info
 	int		door_state[1000][2];
 	int		door_count;
 	double	door_timer[1000];
+
+	t_mouse	mouse;
+	double	rot_speed;
 }			t_map_info;
 
 /* Brensenham */
@@ -137,6 +149,7 @@ typedef struct s_line_params
 	int		sy;
 	int		err;
 }			t_line_params;
+
 
 /*
 ** Main
@@ -236,5 +249,14 @@ int			is_door_closed(t_map_info *map_info, int x, int y);
 int			find_door_index(t_map_info *map_info, int x, int y);
 void		toggle_door(t_map_info *map_info, int x, int y);
 void		interact_with_door(t_map_info *map_info);
+
+/*
+** Mouse
+*/
+
+int			handle_mouse_move(int x, int y, void *param);
+int			toggle_mouse_capture(int keycode, void *param);
+void		init_mouse_controls(t_map_info *data);
+int			render_frame(void *param);
 
 #endif

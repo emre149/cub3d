@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/08 16:05:21 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:52:37 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,17 @@ int	main(int ac, char **av)
 		free_and_exit(&map_info, "Error: Failed to parse map file\n");
 	launch_game(&map_info);
 	return (0);
+}
+
+int	render_frame(void *param)
+{
+	t_map_info	*map_info;
+
+	map_info = (t_map_info *)param;
+	if (map_info->moved || map_info->rot_left || map_info->rot_right)
+	{
+		map_info->moved = 0;
+		raycasting(map_info);
+	}
+	return (0);	
 }

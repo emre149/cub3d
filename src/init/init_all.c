@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:25:44 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/08 16:52:24 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:24:30 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	launch_game(t_map_info *map_info)
 	map_pos(map_info);
 
 	init_doors(map_info);
-
+	init_mouse_controls(map_info);
 	init_textures(map_info);
 	map_info->move[X] = 0;
 	map_info->move[Y] = 0;
@@ -100,10 +100,11 @@ void	launch_game(t_map_info *map_info)
 	map_info->rot_left = 0;
 	map_info->rot_right = 0;
 	raycasting(map_info);
+// In launch_game function
 	mlx_hook(map_info->win, KeyPress, KeyPressMask, key_hook, map_info);
 	mlx_hook(map_info->win, KeyRelease, KeyReleaseMask, key_release, map_info);
-	mlx_hook(map_info->win, DestroyNotify, StructureNotifyMask, destroy_game,
-		map_info);
-	mlx_loop_hook(map_info->mlx, moves, map_info);
+	mlx_hook(map_info->win, DestroyNotify, StructureNotifyMask, destroy_game, map_info);
+	mlx_hook(map_info->win, MotionNotify, PointerMotionMask, handle_mouse_move, map_info);	
+	mlx_loop_hook(map_info->mlx, render_frame, map_info);
 	mlx_loop(map_info->mlx);
 }
