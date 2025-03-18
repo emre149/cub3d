@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:45:17 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/08 15:59:02 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:42:47 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_map(char **map)
 	}
 	free(map);
 }
+
 void	free_tokens(char **tokens)
 {
 	int	i;
@@ -86,12 +87,4 @@ void	error_exit(t_map_info *map_info, char *message)
 	printf("Error:\n %s\n", message);
 	free_all(map_info);
 	exit(1);
-}
-
-int	destroy_game(t_map_info *map_info)
-{
-	free_all(map_info);
-	printf("Game succesfully destroyed\n");
-	exit(0);
-	return (0);
 }

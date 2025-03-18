@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/13 17:52:37 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:34:55 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ int	close_window(t_map_info *data)
 	free(data->mlx);
 	exit(0);
 	return (0);
+}
+
+static void	init_map_info_pointers(t_map_info *map_info)
+{
+	map_info->no_texture = NULL;
+	map_info->so_texture = NULL;
+	map_info->we_texture = NULL;
+	map_info->ea_texture = NULL;
+	map_info->sprite = NULL;
+	map_info->door_text = NULL;
+	map_info->map = NULL;
 }
 
 static void	free_and_exit(t_map_info *map_info, char *error_msg)
@@ -35,6 +46,8 @@ static void	free_and_exit(t_map_info *map_info, char *error_msg)
 		free(map_info->ea_texture);
 	if (map_info->sprite)
 		free(map_info->sprite);
+	if (map_info->door_text)
+		free(map_info->door_text);
 	if (error_msg)
 		printf("%s", error_msg);
 	exit(1);
@@ -44,12 +57,6 @@ int	main(int ac, char **av)
 {
 	t_map_info	map_info;
 
-	map_info.no_texture = NULL;
-	map_info.so_texture = NULL;
-	map_info.we_texture = NULL;
-	map_info.ea_texture = NULL;
-	map_info.sprite = NULL;
-	map_info.door_text = NULL;
 	if (ac != 2)
 	{
 		printf("Error:\n Usage: ./cub3d map_file.cub\n");
@@ -61,6 +68,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	ft_memset(&map_info, 0, sizeof(t_map_info));
+	init_map_info_pointers(&map_info);
 	if (!read_map_file(&map_info, av[1]))
 		free_and_exit(&map_info, "Error: Failed to read map file\n");
 	if (!parse_config(&map_info))
@@ -74,10 +82,11 @@ int	render_frame(void *param)
 	t_map_info	*map_info;
 
 	map_info = (t_map_info *)param;
-	if (map_info->moved || map_info->rot_left || map_info->rot_right)
+	moves(map_info);
+	if (map_info->moved)
 	{
 		map_info->moved = 0;
 		raycasting(map_info);
 	}
-	return (0);	
+	return (0);
 }

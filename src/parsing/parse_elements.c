@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:08:31 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/04 15:27:12 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:30:07 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,16 @@ int	parse_texture(char **texture, char *line, char *identifier)
 	return (1);
 }
 
+static int	validate_rgb_values(int r, int g, int b, char *identifier)
+{
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	{
+		printf("Error:\n Valeur RGB invalide pour %s.\n", identifier);
+		return (0);
+	}
+	return (1);
+}
+
 int	parse_color(int *color, char *line, char *identifier)
 {
 	int	i;
@@ -66,11 +76,8 @@ int	parse_color(int *color, char *line, char *identifier)
 	while (line[i] == ' ' || line[i] == ',')
 		i++;
 	b = ft_atoi(&line[i]);
-	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-	{
-		printf("Error:\n Valeur RGB invalide pour %s. Les valeurs doivent être entre 0 et 255.\n", identifier);
+	if (!validate_rgb_values(r, g, b, identifier))
 		return (0);
-	}
 	*color = (r << 16) | (g << 8) | b;
 	return (1);
 }

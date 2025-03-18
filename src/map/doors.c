@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 15:53:06 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/08 16:39:23 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:27:09 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,21 +88,3 @@ void	toggle_door(t_map_info *map_info, int x, int y)
 		}
 	}
 }
-
-void	interact_with_door(t_map_info *map_info)
-{
-	int	target_x;
-	int	target_y;
-
-	target_x = (int)(map_info->pos[X] + map_info->dir[X]);
-	target_y = (int)(map_info->pos[Y] + map_info->dir[Y]);
-	if (is_door(map_info, target_x, target_y))
-	{
-		toggle_door(map_info, target_x, target_y);
-	}
-	else
-	{
-		printf("No door to interact with\n");
-	}
-}
-

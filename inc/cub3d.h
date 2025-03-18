@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 12:19:54 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/13 17:40:52 by ededemog         ###   ########.fr       */
+/*   Created: 2025/03/18 13:36:48 by ededemog          #+#    #+#             */
+/*   Updated: 2025/03/18 17:09:40 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,117 +52,147 @@
 */
 typedef struct s_img
 {
-	void	*img_mlx;
-	int		*addr;
-	int		line_length;
-	int		bits_per_pixel;
-	int		endian;
-	int		width;
-	int		height;
+    void	*img_mlx;
+    int		*addr;
+    int		line_length;
+    int		bits_per_pixel;
+    int		endian;
+    int		width;
+    int		height;
 }			t_img;
 
 typedef struct s_mouse
 {
-	int		prev_x;
-	int		x;
-	int		y;
-	int		is_captured;
-	int		moved;
+    int		prev_x;
+    int		x;
+    int		y;
+    int		is_captured;
+    int		moved;
 }			t_mouse;
 
 typedef struct s_map_info
 {
-	/* Données de base de la map */
-	char	**map;
-	char	*no_texture;
-	char	*so_texture;
-	char	*we_texture;
-	char	*ea_texture;
-	char	*sprite;
-	int		floor_color;
-	int		ceiling_color;
-	int		map_height;
-	int		map_width;
+    /* Données de base de la map */
+    char	**map;
+    char	*no_texture;
+    char	*so_texture;
+    char	*we_texture;
+    char	*ea_texture;
+    char	*sprite;
+    int		floor_color;
+    int		ceiling_color;
+    int		map_height;
+    int		map_width;
 
-	/* Position du joueur */
-	int		player_x;
-	int		player_y;
-	char	player_dir;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
+    /* Position du joueur */
+    int		player_x;
+    int		player_y;
+    char	player_dir;
+    double	dir_x;
+    double	dir_y;
+    double	plane_x;
+    double	plane_y;
 
-	/* Données de raycasting */
-	double	pos[2];
-	double	dir[2];
-	double	plane[2];
-	int		map_p[2];
-	double	camerax[2];
-	double	ray_dir[2];
-	double	side_dist[2];
-	double	ddist[2];
-	int		step[2];
-	int		wall_x;
-	int		tex[2];
-	int		hit;
-	int		side;
-	double	wall_dist;
-	int		draw_start;
-	int		draw_end;
-	int		line_height;
-	int		tex_num;
-	int		tex_step;
-	int		tex_pos;
-	int		color;
-	int		y;
+    /* Données de raycasting */
+    double	pos[2];
+    double	dir[2];
+    double	plane[2];
+    int		map_p[2];
+    double	camerax[2];
+    double	ray_dir[2];
+    double	side_dist[2];
+    double	ddist[2];
+    int		step[2];
+    int		wall_x;
+    int		tex[2];
+    int		hit;
+    int		side;
+    double	wall_dist;
+    int		draw_start;
+    int		draw_end;
+    int		line_height;
+    int		tex_num;
+    int		tex_step;
+    int		tex_pos;
+    int		color;
+    int		y;
 
-	/* MLX et textures */
-	void	*mlx;
-	void	*win;
-	int		**assets;
-	t_img	*img;
+    /* MLX et textures */
+    void	*mlx;
+    void	*win;
+    int		**assets;
+    t_img	*img;
 
-	/* Mouvement */
-	int		move[2];
-	int		moved;
-	int		rot_left;
-	int		rot_right;
+    /* Mouvement */
+    int		move[2];
+    int		moved;
+    int		rot_left;
+    int		rot_right;
 
-	/* Portes */
+    /* Portes */
 
-	char	*door_text;
-	int		door_state[1000][2];
-	int		door_count;
-	double	door_timer[1000];
+    char	*door_text;
+    int		door_state[1000][2];
+    int		door_count;
+    double	door_timer[1000];
 
-	t_mouse	mouse;
-	double	rot_speed;
+    t_mouse	mouse;
+    double	rot_speed;
 }			t_map_info;
 
 /* Brensenham */
 typedef struct s_line_params
 {
-	int		dx;
-	int		dy;
-	int		sx;
-	int		sy;
-	int		err;
+    int		dx;
+    int		dy;
+    int		sx;
+    int		sy;
+    int		err;
 }			t_line_params;
 
+typedef struct s_point
+{
+   int x;
+   int y;
+} t_point;
+
+typedef struct s_draw_data
+{
+    int		draw_start;
+    int		draw_end;
+    int		tex_num;
+    double	wall_x;
+    int		tex_x;
+    double	step;
+    double	tex_pos;
+}	t_draw_data;
 
 /*
 ** Main
 */
 int			close_window(t_map_info *map_info);
 int			key_hook(int keycode, t_map_info *map_info);
+int			render_frame(void *param);
 
 /*
 ** Parsing du fichier
 */
 int			is_valid_map_file(char *filename);
 int			read_map_file(t_map_info *map_info, char *file_path);
+
+/* parse_config.c */
 int			parse_config(t_map_info *map_info);
+
+/* process_config.c */
+int			process_config_line(t_map_info *map_info, char *line, 
+                int *map_started);
+int			process_texture_line(t_map_info *map_info, char *line);
+int			process_color_line(t_map_info *map_info, char *line);
+int			process_map_line(char *line, int *map_started);
+
+/* textures_parsing.c */
+int			validate_textures(t_map_info *map_info);
+int			check_elements(t_map_info *map_info);
 
 /*
 ** Parsing des éléments
@@ -176,12 +206,30 @@ void		parse_map_only(t_map_info *map_info);
 /*
 ** Validation de la map
 */
-int			check_required_elements(t_map_info *map_info);
 int			check_color_format(char *line, char *identifier);
 int			is_valid_texture_file(char *path);
-int			validate_textures(t_map_info *map_info);
 int			validate_map(t_map_info *map_info);
 void		detect_player(t_map_info *map_info);
+void		set_directions(int directions[8][2]);
+
+/* map_bounds.c */
+int			get_map_bounds(char **map, int *start, int *end);
+char		**duplicate_map_lines(char **map, int start, int end);
+
+/* map_chars.c */
+int			check_valid_chars(char **map);
+
+/* map_closed.c */
+int			is_empty_or_edge(char **map, int i, int j);
+int			check_map_closed(char **map);
+int			is_surrounded(char **map, int i, int j);
+
+/* player_init.c */
+void		normalize_map(char **map, t_map_info *map_info);
+void		restore_player(t_map_info *map_info);
+void		init_player_direction(t_map_info *map_info);
+void		set_player_ns_direction(t_map_info *map_info);
+void		set_player_ew_direction(t_map_info *map_info);
 
 /*
 ** Utilitaires
@@ -232,17 +280,15 @@ int			key_release(int keycode, t_map_info *map_info);
 /*
 ** Mini map
 */
-
 void		draw_mini_map(t_map_info *data, t_map_info *map_info);
-void		draw_line_minimap(t_map_info *data, int x0, int y0, int x1, int y1,
-				int color);
+void		draw_line_minimap(t_map_info *data, t_point start, t_point end,
+                int color);
 void		draw_player_dir(t_map_info *data, t_map_info *map_info);
 void		draw_player_dot(t_map_info *data, int player_x, int player_y);
 
 /*
 ** Doors
 */
-
 void		init_doors(t_map_info *map_info);
 int			is_door(t_map_info *map_info, int x, int y);
 int			is_door_closed(t_map_info *map_info, int x, int y);
@@ -253,10 +299,10 @@ void		interact_with_door(t_map_info *map_info);
 /*
 ** Mouse
 */
-
 int			handle_mouse_move(int x, int y, void *param);
 int			toggle_mouse_capture(int keycode, void *param);
 void		init_mouse_controls(t_map_info *data);
-int			render_frame(void *param);
+
+void	draw_line(t_map_info *map_info, int **buff, int x);
 
 #endif

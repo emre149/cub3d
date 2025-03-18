@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 22:17:14 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/02 15:59:27 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:34:34 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	draw_square(t_map_info *data, int x, int y, int color)
 
 void	render_map(t_map_info *map_info)
 {
-	int x;
-	int y;
-	int i;
-	int j;
+	int	x;
+	int	y;
+	int	i;
+	int	j;
 
 	i = 0;
 	y = 50;

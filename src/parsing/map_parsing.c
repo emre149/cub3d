@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:36:31 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/03 15:17:06 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:27:25 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,33 @@ static int	close_return(int fd)
 	return (0);
 }
 
+static int	process_map_lines(int fd, char ***lines, int *count)
+{
+	char	*line;
+	char	*cleaned_line;
+
+	line = get_next_line(fd);
+	while (line)
+	{
+		cleaned_line = clean_line(line);
+		if (cleaned_line && *cleaned_line)
+		{
+			if (!add_line(lines, count, cleaned_line))
+				return (close_return(fd));
+		}
+		else
+			free(cleaned_line);
+		line = get_next_line(fd);
+	}
+	return (1);
+}
+
 int	read_map_file(t_map_info *map_info, char *file_path)
 {
 	int		fd;
-	char	*line;
-	char	*cleaned_line;
 	char	**lines;
 	int		count;
+	int		result;
 
 	count = 0;
 	fd = open(file_path, O_RDONLY);
@@ -80,20 +100,9 @@ int	read_map_file(t_map_info *map_info, char *file_path)
 		return (0);
 	}
 	lines = NULL;
-	line = get_next_line(fd);
-	while (line)
-	{
-		cleaned_line = clean_line(line);
-		if (cleaned_line && *cleaned_line)
-		{
-			if (!add_line(&lines, &count, cleaned_line))
-				return (close_return(fd));
-		}
-		else
-			free(cleaned_line);
-		line = get_next_line(fd);
-	}
+	result = process_map_lines(fd, &lines, &count);
 	close(fd);
-	map_info->map = lines;
-	return (1);
+	if (result)
+		map_info->map = lines;
+	return (result);
 }

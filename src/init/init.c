@@ -6,22 +6,11 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:25:18 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/08 15:27:36 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:58:28 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-void	set_img(t_img *img)
-{
-	img->img_mlx = NULL;
-	img->addr = NULL;
-	img->line_length = 0;
-	img->bits_per_pixel = 0;
-	img->endian = 0;
-	img->width = 0;
-	img->height = 0;
-}
 
 void	init_mlx(t_map_info *map_info)
 {
