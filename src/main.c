@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 13:22:20 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/18 15:34:55 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/20 21:04:42 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,9 @@ int	render_frame(void *param)
 	t_map_info	*map_info;
 
 	map_info = (t_map_info *)param;
-	moves(map_info);
-	if (map_info->moved)
+	if (moves(map_info))
 	{
-		map_info->moved = 0;
+		update_camera_bob(map_info);
 		raycasting(map_info);
 	}
 	return (0);

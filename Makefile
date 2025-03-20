@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/03/18 17:01:47 by ededemog         ###   ########.fr        #
+#    Updated: 2025/03/20 21:22:03 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,10 +45,13 @@ SRC_FILES := main.c \
 			rendering/raycasting.c \
 			rendering/mini_map.c \
 			rendering/raycasting_render.c \
+			rendering/drawline.c \
+			rendering/textures_test.c \
 			utils/utils.c \
 			utils/utils_2.c \
 			utils/mini_map_utils.c \
 			utils/raycasting_utils.c \
+			utils/raycasting_utils_2.c \
 
 SRC := $(addprefix $(SRCDIR), $(SRC_FILES))
 

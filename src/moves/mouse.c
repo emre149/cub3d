@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:00:32 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/18 16:31:01 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:08:05 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ void	init_mouse_controls(t_map_info *data)
 	data->mouse.x = win_width / 2;
 	data->mouse.y = win_height / 2;
 	data->mouse.is_captured = 0;
-	data->rot_speed = 0.0002;
+	data->rot_speed = 0.002;
 	printf("Mouse controls initialized. Press 'm' to toggle mouse capture.\n");
 }

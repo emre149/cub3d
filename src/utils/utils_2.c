@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 15:36:52 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/18 16:34:57 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/20 21:15:07 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,14 @@ int	toggle_mouse_capture(int keycode, void *param)
 	mlx_get_screen_size(data->mlx, &win_width, &win_height);
 	handle_mouse_capture_state(data, win_width, win_height);
 	return (0);
+}
+
+void	clean_buff(int **buff)
+{
+	int	i;
+
+	i = -1;
+	while (++i < SCREEN_HEIGHT)
+		free(buff[i]);
+	free(buff);
 }

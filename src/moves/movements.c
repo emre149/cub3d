@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 15:16:29 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/13 17:40:25 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:58:39 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,21 @@ int	move(t_map_info *map_info)
 
 int	moves(t_map_info *map_info)
 {
+	int	moved;
+
 	map_info->moved = move(map_info);
 	if (map_info->moved == 0)
 		return (1);
 	raycasting(map_info);
-	return (0);
+	moved = 0;
+	if (map_info->move[X] != 0)
+		moved = x_move(map_info, map_info->move[X]);
+	if (map_info->move[Y] != 0)
+		moved = y_move(map_info, map_info->move[Y]) || moved;
+	if (map_info->rot_left)
+		moved = left_rotate(map_info) || moved;
+	if (map_info->rot_right)
+		moved = right_rotate(map_info) || moved;
+	map_info->is_walking = (map_info->move[X] != 0 || map_info->move[Y] != 0);
+	return (moved);
 }

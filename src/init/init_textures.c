@@ -6,11 +6,11 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 16:00:50 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/18 16:02:06 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:07:26 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
 
 static int	*stock_tmp(t_map_info *map_info, char *path)
 {
