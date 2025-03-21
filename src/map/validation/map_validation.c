@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:00:11 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/18 13:00:36 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:33:24 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,10 @@ int	validate_map(t_map_info *map_info)
 	restore_player(map_info);
 	init_player_direction(map_info);
 	return (1);
+}
+
+int	close_return(int fd)
+{
+	close(fd);
+	return (0);
 }
