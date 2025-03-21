@@ -6,7 +6,7 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/03/20 21:22:03 by ededemog         ###   ########.fr        #
+#    Updated: 2025/03/21 16:50:45 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_FILES := main.c \
 			moves/movements.c \
 			moves/rotate.c \
 			moves/mouse.c \
+			moves/moves.c \
 			rendering/render_map.c \
 			rendering/raycasting.c \
 			rendering/mini_map.c \
