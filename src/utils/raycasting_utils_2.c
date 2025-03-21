@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 21:12:14 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/20 21:28:06 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:47:11 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ static void	process_pixel(t_map_info *map_info, t_img *img, int **buff,
 	{
 		img->addr[index] = buff[pd->i][pd->x];
 		pd->has_texture = 1;
-		if (pd->i == SCREEN_HEIGHT / 2 && pd->x % 100 == 0)
-			printf("Pixel de texture à (%d,%d): 0x%X\n", pd->x, pd->i,
-				buff[pd->i][pd->x]);
 	}
 	else if (pd->i < SCREEN_HEIGHT / 2)
 		apply_ceiling_color(map_info, img, index);
@@ -59,16 +56,9 @@ void	add_img(t_map_info *map_info, int **buff, t_img *img)
 	img->img_mlx = mlx_new_image(map_info->mlx, SCREEN_WIDTH, SCREEN_HEIGHT);
 	img->addr = (int *)mlx_get_data_addr(img->img_mlx, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
-	printf("Bits par pixel: %d, Line length: %d, Endian: %d\n",
-		img->bits_per_pixel, img->line_length, img->endian);
 	pd.i = -1;
 	while (++(pd.i) < SCREEN_HEIGHT)
 		process_image_row(map_info, img, buff, &pd);
-	if (pd.has_texture == 0)
-		printf("ATTENTION: Aucun pixel de texture n'a été trouvé dans \
-				le buffer!\n");
-	else
-		printf("Des pixels de texture ont été trouvés dans le buffer.\n");
 	mlx_put_image_to_window(map_info->mlx, map_info->win, img->img_mlx, 0, 0);
 	mlx_destroy_image(map_info->mlx, img->img_mlx);
 }

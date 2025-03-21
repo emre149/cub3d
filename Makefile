@@ -6,11 +6,11 @@
 #    By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/07 13:23:06 by ededemog          #+#    #+#              #
-#    Updated: 2025/03/21 16:50:45 by ededemog         ###   ########.fr        #
+#    Updated: 2025/03/21 17:37:17 by ededemog         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := cub3d
+NAME := cub3D
 
 SRCDIR := src/
 OBJDIR := obj/

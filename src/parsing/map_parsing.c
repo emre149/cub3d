@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:36:31 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/21 17:28:06 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:40:07 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	read_map_file(t_map_info *map_info, char *file_path)
 	fd = open(file_path, O_RDONLY);
 	if (fd < 0)
 	{
-		perror("Error opening file");
+		perror("Error: Failed to open file");
 		return (0);
 	}
 	lines = NULL;

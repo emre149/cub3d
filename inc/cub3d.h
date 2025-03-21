@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:36:48 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/21 17:34:18 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:42:20 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@
 # define IMG_SIZE 64
 # define P_SPEED 0.06
 # define R_SPEED 0.06
-# define SCREEN_WIDTH 1920
-# define SCREEN_HEIGHT 1080
+# define SCREEN_WIDTH 1600
+# define SCREEN_HEIGHT 900
 # define MINI_MAP_SCALE 10
 # define DOOR_OPEN 'D'
 # define DOOR_CLOSE 'd'

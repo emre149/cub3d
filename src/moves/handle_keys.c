@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 15:21:17 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/18 12:25:35 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:49:10 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ int	key_hook(int keycode, t_map_info *map_info)
 		interact_with_door(map_info);
 	if (keycode == 109)
 		toggle_mouse_capture(keycode, map_info);
-	printf("Key pressed: %d\n", keycode);
 	return (0);
 }
 
