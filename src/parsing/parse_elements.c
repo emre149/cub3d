@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 17:08:31 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/18 15:30:07 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:11:10 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ int	is_map_line(char *line)
 	valid = 0;
 	while (line[i])
 	{
-		if (line[i] == '1')
+		if (line[i] == '1' || line[i] == ' ')
 			valid = 1;
-		else if (line[i] != '0' && line[i] != ' ' && line[i] != 'N'
+		else if (line[i] != '0' && line[i] != 'N'
 			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W')
 			return (0);
 		i++;

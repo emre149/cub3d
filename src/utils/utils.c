@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 15:45:17 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/18 15:42:47 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/03/25 17:55:11 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	free_asset(t_map_info *map_info)
 	if (!map_info->assets)
 		return ;
 	i = 0;
-	while (i < 4)
+	while (i < 5)
 	{
 		if (map_info->assets[i])
 			free(map_info->assets[i]);
