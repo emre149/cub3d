@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:36:48 by ededemog          #+#    #+#             */
-/*   Updated: 2025/04/02 10:19:56 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:07:37 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 */
 
 /* Forward declarations - to resolve circular dependency */
-struct s_map_info;
+struct						s_map_info;
 typedef struct s_map_info	t_map_info;
 
 /* Graphics */

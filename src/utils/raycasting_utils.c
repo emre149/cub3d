@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 15:14:29 by ededemog          #+#    #+#             */
-/*   Updated: 2025/04/02 10:09:54 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:07:05 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,7 @@ void	algo_dda(t_map_info *map_info)
 static void	determine_texture(t_map_info *map_info)
 {
 	if (map_info->map[map_info->map_p[Y]][map_info->map_p[X]] == DOOR_CLOSE)
-	{
-		printf("Door detected at position [%d][%d]\n", map_info->map_p[Y],
-			map_info->map_p[X]);
 		map_info->tex_num = DOOR;
-	}
 	else
 	{
 		if (map_info->side == 0)
@@ -130,7 +126,6 @@ void	calc_dist(t_map_info *map_info)
 	map_info->line_height = (int)(SCREEN_HEIGHT / map_info->wall_dist);
 	if (map_info->line_height > SCREEN_HEIGHT * 10)
 		map_info->line_height = SCREEN_HEIGHT * 10;
-		
 	map_info->draw_start = -map_info->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (map_info->draw_start < 0)
 		map_info->draw_start = 0;
