@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 16:45:38 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/21 16:57:33 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:21:45 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ int	moves(t_map_info *map_info)
 	moved = 0;
 	if (movement_moved || rotation_moved)
 		moved = 1;
-	map_info->is_walking = (map_info->move[X] != 0 || map_info->move[Y] != 0);
 	return (moved);
 }

@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 14:25:44 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/20 21:01:54 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:20:26 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,42 +48,4 @@ void	set_img(t_img *img)
 	img->endian = 0;
 	img->width = 0;
 	img->height = 0;
-}
-
-void	update_camera_bob(t_map_info *map_info)
-{
-	struct timeval			current_time;
-	static struct timeval	last_time;
-	double					delta_time;
-
-	gettimeofday(&current_time, NULL);
-	if (last_time.tv_sec == 0 && last_time.tv_usec == 0)
-		last_time = current_time;
-	delta_time = (current_time.tv_sec - last_time.tv_sec)
-		+ (current_time.tv_usec - last_time.tv_usec) / 1000000.0;
-	if (delta_time > 0.1)
-		delta_time = 0.1;
-	last_time = current_time;
-	map_info->time_counter += delta_time * map_info->bob_speed;
-	if (map_info->is_walking)
-	{
-		map_info->bob_height = sin(map_info->time_counter)
-			* map_info->bob_amplitude;
-	}
-	else
-	{
-		if (fabs(map_info->bob_height) > 0.1)
-			map_info->bob_height *= 0.8;
-		else
-			map_info->bob_height = 0;
-	}
-}
-
-void	init_camera_bob(t_map_info *map_info)
-{
-	map_info->bob_height = 0.0;
-	map_info->bob_speed = 5.0;
-	map_info->bob_amplitude = 5.0;
-	map_info->is_walking = 0;
-	map_info->time_counter = 0.0;
 }

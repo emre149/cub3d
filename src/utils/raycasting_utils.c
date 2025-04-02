@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/02 15:14:29 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/18 15:45:16 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:09:54 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,12 @@ void	calc_dist(t_map_info *map_info)
 		map_info->wall_dist = (map_info->side_dist[X] - map_info->ddist[X]);
 	else
 		map_info->wall_dist = (map_info->side_dist[Y] - map_info->ddist[Y]);
+	if (map_info->wall_dist <= 0.001)
+		map_info->wall_dist = 0.001;
 	map_info->line_height = (int)(SCREEN_HEIGHT / map_info->wall_dist);
+	if (map_info->line_height > SCREEN_HEIGHT * 10)
+		map_info->line_height = SCREEN_HEIGHT * 10;
+		
 	map_info->draw_start = -map_info->line_height / 2 + SCREEN_HEIGHT / 2;
 	if (map_info->draw_start < 0)
 		map_info->draw_start = 0;

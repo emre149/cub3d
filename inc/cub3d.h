@@ -6,7 +6,7 @@
 /*   By: ededemog <ededemog@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 13:36:48 by ededemog          #+#    #+#             */
-/*   Updated: 2025/03/21 17:42:20 by ededemog         ###   ########.fr       */
+/*   Updated: 2025/04/02 10:19:56 by ededemog         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 */
 
 /* Forward declarations - to resolve circular dependency */
-struct						s_map_info;
+struct s_map_info;
 typedef struct s_map_info	t_map_info;
 
 /* Graphics */
@@ -198,11 +198,6 @@ struct						s_map_info
 	int						door_state[1000][2];
 	int						door_count;
 	double					door_timer[1000];
-	double					bob_height;
-	double					bob_speed;
-	double					bob_amplitude;
-	int						is_walking;
-	double					time_counter;
 	t_mouse					mouse;
 };
 
@@ -358,9 +353,6 @@ int							is_door_closed(t_map_info *map_info, int x, int y);
 int							find_door_index(t_map_info *map_info, int x, int y);
 void						toggle_door(t_map_info *map_info, int x, int y);
 void						interact_with_door(t_map_info *map_info);
-
-void						update_camera_bob(t_map_info *map_info);
-void						init_camera_bob(t_map_info *map_info);
 
 int							close_return(int fd);
 
